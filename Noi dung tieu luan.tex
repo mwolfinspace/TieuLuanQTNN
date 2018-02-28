@@ -11,6 +11,10 @@
 \usepackage{parskip}
 \setlength{\parskip}{0.5em}
 
+%Điều chỉnh kích cỡ chữ cho tài liệu
+\usepackage{scrextend}
+\changefontsizes[20pt]{14pt}
+
 %Thêm phần header cho trang
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -99,6 +103,58 @@
 
 
 %Chương 1:
-Hello
+\textbf{Nội dung trong tập}\\
+\textbf{* Giải tích cũ:} Nhận dạng $F(x,y,y',y'',...,y^{(n)})$ rồi giải phương trình \begin{equation}
+	\begin{aligned}
+		F(x,dx,d^2x,...,d^{(n)}x)=0
+	\end{aligned}
+\end{equation}
+Trong đó nếu gặp dạng đặc biệt ta giải phương trình vi phân tuyến tính theo dạng thuần nhất rồi đến dạng không thuần nhất.\\
+Xét: $a_ny^{(n)}_x+a_{n-1}y^{(n-1)}_x+...+a_1y'(x)+a_0y(x)=f(x)$ nếu $f(x)=0$ thì phương trình tuyến tính thuần nhất, ngược lại nếu $f(x)\neq0$ thì phương trình tuyến tính không thuần nhất.\\
+* Phương pháp giải: Giải phương trình thuần nhất (tương ứng) theo phương pháp biến thiên hằng số tức là:
+\begin{gather*}
+	ay''+by'+cy=f\Rightarrow ay''+by'+cy=0
+\end{gather*}
+Khi đó phương trình đặc trưng $ak^2+bk+c=0$ có nghiệm tổng quát là:\\
+$\begin{cases} y(x)=c_1e^{k_1x}+c_2e^{k_2x} & (k_1\neq k_2 \in \mathbb{R}) \\ y(x)=(c_1x+c_2)e^{kx} & (k_1=k_2=k\in \mathbb{R}) \\ y(x)=e^{\alpha x}(c_1\cos{\beta x}+c_2\sin{\beta x}) & (k_{1,2}=\alpha \pm \beta i) \end{cases}$\\
+\textbf{* Giải tích ngẫu nhiên}: Giải phương trình $dX_t=\alpha(\omega,t)dt+\beta(\omega,t)dW_t$ hay dạng tổng quát $dX_t=\alpha(\omega,t)dt+\beta(\omega,t)d\aleph_t$ với $\aleph_t$ là quá trình có vi phân ngẫu nhiên.\\
+* Phương pháp giải: Khi giải phương trình vi phân tuyến tính thuần nhất trước, sau đó ta dùng phương pháp biến đổi hằng số để trừ ra nghiệm tổng quát của phương trình vi phân tuyến tính không thuần nhất.\\
+* Nhận dạng phương trình vi phân tuyến tính:\\
+$dX_t=\alpha X_tdt+\beta X_tdW_t \rightarrow$ phương trình vi phân tuyến tính thuần nhất.\\
+$dX_t=(\alpha X_t+F)dt+(\beta X_t+G)dW_t$ nếu $F\equiv G \equiv 0$ thì không thuần nhất.\\
+* Phương pháp chung: Dùng công thức Itô $\rightarrow$ Giải phương trình thuần nhất $\Rightarrow$ Dùng phương pháp tách biến để giải phương trình không thuần nhất.\\
+\textbf{* Phương trình Black-Scholes}: $dX=\alpha dt+\beta dW$\\
+B1: Giải thuần nhất thiếu (khử $\alpha$) suy ra $X_1$.\\
+B2: Dùng phương pháp tách nghiệm $X=X_1.X_2$ để tìm $X_2$.\\
+B3: Trong $X_2$ có A, B chưa biết, tìm A, B.
+B4: Có $X_2$ kết hợp với $X_1$ để có $X\Rightarrow$ Giải xong phương trình thuần nhất đủ.\\
+B5: Giải phương trình không thuần nhất từ kết quả trước đó.\\
+B6: Dùng phương pháp tách biến để thực hiện B5.\\
+B7: Sau khi tách biến, kết quả giống với B1, lại tìm A, B chưa biết khác.\\
+B8: Có $\xi_2$ lại kết hợp $\xi_1$ để ra $\xi$ là nghiệm cần tìm.
 
+\textbf{Quyển "Lớp quá trình ngẫu nhiên Itô - Levy và ứng dụng"}\\
+\textbf{1. Phương trình vi phân tuyến tính Itô - Levy}\\
+a. Định nghĩa Phương trình vi phân tuyến tính\\
+b. Định lý Giải phương trình vi phân ngẫu nhiên\\
+c. Bổ đề\\
+\textbf{2. Một số phương trình đặc biệt}\\
+a. Phương trình Langevin\\
+b. Phương trình vi phân tuyến tính với chuyển động Brown nhiều chiều\\
+c. Phương trình Black - Scholes\\
+
+\textbf{Quyển "Quá trình ngẫu nhiên - Phần 1"}\\
+\textbf{1. Khái niệm về phương trình vi phân ngẫu nhiên}\\
+\textbf{2. Một số phương trình đặc biệt}\\
+
+\textbf{Quyển "Quá trình ngẫu nhiên - Phần 2"}\\
+\textbf{Giải phương trình vi phân tuyến tính Itô - Levy}\\
+
+
+%Nội dung trọng tâm
+\textbf{Phương trình vi phân ngẫu nhiên}\\
+Yêu cầu: Dạng phương trình vi phân ngẫu nhiên\\
+Nghiệm yếu và nghiệm mạnh\\
+Các dạng đặc biệt của phương trình vi phân ngẫu nhiên\\
+Phương trình vi phân tuyến tính.\\
 \end{document}
