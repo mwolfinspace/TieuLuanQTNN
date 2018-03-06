@@ -94,6 +94,11 @@
 \theoremseparator{:}
 \renewtheorem{example}{Ví dụ}
 
+%Tự ngắt dòng cho biểu thức toán dài dòng
+\usepackage{mathpazo}
+\usepackage[mathpazo]{flexisym}
+\usepackage{breqn}
+
 %Nội dung chính
 \begin{document}
 %Chỉnh loại tiêu đề chương thành I, II
@@ -137,12 +142,10 @@ B8: Có $\xi_2$ lại kết hợp $\xi_1$ để ra $\xi$ là nghiệm cần tìm
 \textbf{1. Phương trình vi phân tuyến tính Itô - Levy}\\
 a. Định nghĩa Phương trình vi phân tuyến tính Itô - Levy\\
 \textbf{Định nghĩa:} Phương trình vi phân tuyến tính Itô - Levy là phương trình có dạng:
-\begin{equation}
-	\begin{aligned}
+\begin{dmath}\label{eq:dn1}
 	dX(t)=[\alpha(t,\omega)X(t^-)+A(t,\omega)]dt+[\beta(t,\omega)X(t^-)+B(t,\omega)]dW(t)\\
 	+\int_{(R_0)^{n_2}}[\gamma(t,z,\omega)X(t^-)+G(t,z,\omega)]\overline{N}(dt,dz)
-	\end{aligned}
-\end{equation}
+\end{dmath}
 Trong đó điều kiện ban đầu $X(0)=x_0$, với:
 \begin{center}
 $\alpha(t,\omega); \beta(t,\omega);A(t,\omega);B(t,\omega);\gamma(t,z,\omega);G(t,z,\omega);$\\
@@ -152,7 +155,22 @@ là những quá trình ngẫu nhiên khả đoán cho trước với:
 \begin{center}
 	$\gamma(t,z,\omega)>-1;\forall (t,z,\omega)\in [0,\inf\}\times R_0 \times \Omega$
 \end{center}
+và thoả các điều kiện:
+\begin{center}
+	$\int\limits_{0}^t[|\alpha(s,\omega)|-\dfrac{1}{2}\beta^2(s,\omega)+\int\limits_{R_0} \gamma^2(s,z,\omega)v(dz)]ds<\infty$; h.c\\
+	$\int\limits_{0}^t [|A(s,\omega)-\dfrac{1}{2}B^2(s,\omega)+\int\limits_{R_0}G^2(s,z,\omega)v(dz)]ds<\infty$; h.c
+\end{center}
+khi $A(t,\omega)\equiv B(t,\omega)\equiv G(t,z,\omega)\equiv 0$, h.c; ta gọi đó là quá trình vi phân ngẫu nhiên tuyến tính thuần nhất hay còn gọi là phương trình vi phân ngẫu nhiên hình học.\\
 b. Định lý Giải phương trình vi phân ngẫu nhiên\\
+Cho phương trình vi phân ngẫu nhiên tuyến tính Itô - Levy nêu trong định nghĩa trên, khi đó phương trình \eqref{eq:dn1} sẽ có nghiệm là:
+\begin{dmath}\label{eq:dl1}
+	\dfrac{X(t)}{X_1(t^-)}=\left\{x_0+\int_{R_0}\dfrac{1}{X_1(s^-)}[A(s,\omega)-\beta(s,\omega)B(s,\omega)-\int_{R_0} \dfrac{\gamma(s,z,\omega)G(s,z,\omega)}{1+\gamma(s,z,\omega)}v(dz)]ds+\int_{0}^{t} \dfrac{B(s,\omega)}{X_1(s)}+\int_{0}^{t} \int_{R_0} \dfrac{G(s,z,\omega)}{X_1(s^-)(1+\gamma(s,z,\omega))} \overline{N}(ds,dz) \right\}
+\end{dmath}
+Trong đó:
+\begin{dmath}
+	X_1(t)=exp\left\{\int_{0}^{t}\left[\alpha(s,\omega)-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}\log(1+\gamma(s,z,\omega))-\gamma(s,z,\omega)v(dz) \right]ds+\int_{0}^{1}\beta(s,\omega)dW(s)+\int_{0}^{1}\int_{R_0}\log(1+\gamma(s,t,\omega))\overline{N}(ds,dz) \right\}
+\end{dmath}
+Để chứng minh định lý trên trước hết ta cần chứng minh bổ đề sau:\\
 c. Bổ đề\\
 \textbf{2. Một số phương trình đặc biệt}\\
 a. Phương trình Langevin\\
