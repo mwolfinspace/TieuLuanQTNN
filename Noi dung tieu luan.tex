@@ -167,11 +167,38 @@ Cho phương trình vi phân ngẫu nhiên tuyến tính Itô - Levy nêu trong 
 	\dfrac{X(t)}{X_1(t^-)}=\left\{x_0+\int_{R_0}\dfrac{1}{X_1(s^-)}[A(s,\omega)-\beta(s,\omega)B(s,\omega)-\int_{R_0} \dfrac{\gamma(s,z,\omega)G(s,z,\omega)}{1+\gamma(s,z,\omega)}v(dz)]ds+\int_{0}^{t} \dfrac{B(s,\omega)}{X_1(s)}+\int_{0}^{t} \int_{R_0} \dfrac{G(s,z,\omega)}{X_1(s^-)(1+\gamma(s,z,\omega))} \overline{N}(ds,dz) \right\}
 \end{dmath}
 Trong đó:
-\begin{dmath}
+\begin{dmath}\label{eq:pt1}
 	X_1(t)=exp\left\{\int_{0}^{t}\left[\alpha(s,\omega)-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}\log(1+\gamma(s,z,\omega))-\gamma(s,z,\omega)v(dz) \right]ds+\int_{0}^{1}\beta(s,\omega)dW(s)+\int_{0}^{1}\int_{R_0}\log(1+\gamma(s,t,\omega))\overline{N}(ds,dz) \right\}
 \end{dmath}
 Để chứng minh định lý trên trước hết ta cần chứng minh bổ đề sau:\\
 c. Bổ đề\\
+Cho phương trình vi phân ngẫu nhiên tuyến tính thuần nhất, nghĩa là phương trình có dạng:
+\begin{dmath}\label{eq:pt2}
+	\dfrac{dX_1(t)}{X_1(t^-)}=\left[\alpha(t,\omega)dt+\beta(t,\omega)dW(t)+\int_{R_0}\gamma(t,z,\omega)\overline{N}(dt,dz) \right]	
+\end{dmath}
+Với điều kiện ban đầu $X(0)=1$, trong đó:
+\begin{equation*}
+\alpha(t,\omega);\beta(t,\omega);\gamma(t,z,\omega);t\geq0;z\in R_0;\omega\in \Omega	
+\end{equation*}
+là những quá trình ngẫu nhiên khả đoán cho trước với
+\begin{equation*}
+	\gamma(t,z,\omega)>-1;\forall (t,z,\omega)\in [0;\infty\}\times R_0 \times \Omega
+\end{equation*}
+và thoả điều kiện:
+\begin{equation*}
+	\int\limits_{0}^{t}\left[|\alpha(s,\omega)|-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}\gamma^2(s,z,\omega)v(dz) \right]ds<\infty \condition{h.c}
+\end{equation*}
+khi đó nghiệm của phương trình \eqref{eq:pt2} sẽ được cho bởi hệ thức \eqref{eq:pt1}.\\
+\textbf{Chứng minh bổ đề}:\\
+Ta xét hàm $X_1(t)=F(t,H(t));t\geq 0$ với $F(t,x)=e^x$ và $H(T)$ xác định bởi:
+\begin{dmath*}
+H(t)=\int\limits_{0}^{t}\left[\alpha(s,\omega)-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}\log(1+\gamma(s,z,\omega))-\gamma(s,z,\omega)v(dz) \right]ds+\int_{0}^{1}\beta(s,\omega)dW(s)+\int_{0}^{1}\int_{R_0}\log(1+\gamma(s,z,\omega))\overline{N}(ds,dz)	
+\end{dmath*}
+Áp dụng công thức Itô cho $X_1(t)=F(t,H(t))$, ta sẽ thu được:
+\begin{dmath*}
+dX_1(t)=e^{H(t)}\left[\left(\alpha(t,\omega)-\dfrac{1}{2}\beta^2(t,\omega)+\int_{R_0}[\log(1+\gamma(t,z,\omega))-\gamma(t,z,\omega)]v(dz) \right)dt\right]+e^{H(t)}\left[\dfrac{1}{2}\beta^2(t,\omega)dt+\beta(t,\omega)dW(t) \right]	+\int_{R_0}e^{H(t)}[\gamma((t,z,\omega)-\log(1+\gamma(t,z,\omega)))]v(dz)dt+\int_{R_0}e^{H(t^-)}\gamma(t,z,\omega)\tilde{N}(dt,dz)=X_1(t^-)\left[\alpha(t,\omega)dt+\beta(t,\omega)dW(t)+\int_{R_0}\gamma(t,z,\omega)\tilde{N}(dt,dz) \right]
+\end{dmath*}
+
 \textbf{2. Một số phương trình đặc biệt}\\
 a. Phương trình Langevin\\
 b. Phương trình vi phân tuyến tính với chuyển động Brown nhiều chiều\\
