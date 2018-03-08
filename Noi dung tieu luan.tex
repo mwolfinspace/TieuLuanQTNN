@@ -196,11 +196,64 @@ H(t)=\int\limits_{0}^{t}\left[\alpha(s,\omega)-\dfrac{1}{2}\beta^2(s,\omega)+\in
 \end{dmath*}
 Áp dụng công thức Itô cho $X_1(t)=F(t,H(t))$, ta sẽ thu được:
 \begin{dmath*}
-dX_1(t)=e^{H(t)}\left[\left(\alpha(t,\omega)-\dfrac{1}{2}\beta^2(t,\omega)+\int_{R_0}[\log(1+\gamma(t,z,\omega))-\gamma(t,z,\omega)]v(dz) \right)dt\right]+e^{H(t)}\left[\dfrac{1}{2}\beta^2(t,\omega)dt+\beta(t,\omega)dW(t) \right]	+\int_{R_0}e^{H(t)}[\gamma((t,z,\omega)-\log(1+\gamma(t,z,\omega)))]v(dz)dt+\int_{R_0}e^{H(t^-)}\gamma(t,z,\omega)\tilde{N}(dt,dz)=X_1(t^-)\left[\alpha(t,\omega)dt+\beta(t,\omega)dW(t)+\int_{R_0}\gamma(t,z,\omega)\tilde{N}(dt,dz) \right]
+dX_1(t)=e^{H(t)}\left[\left(\alpha(t,\omega)-\dfrac{1}{2}\beta^2(t,\omega)+\int_{R_0}[\log(1+\gamma(t,z,\omega))-\gamma(t,z,\omega)]v(dz) \right)dt\right]+e^{H(t)}\left[\dfrac{1}{2}\beta^2(t,\omega)dt+\beta(t,\omega)dW(t) \right]	+\int_{R_0}e^{H(t)}[\gamma((t,z,\omega)-\log(1+\gamma(t,z,\omega)))]v(dz)dt+\int_{R_0}e^{H(t^-)}\gamma(t,z,\omega)\tilde{N}(dt,dz)=X_1(t^-)\left[\alpha(t,\omega)dt+\beta(t,\omega)dW(t)+\int_{R_0}\gamma(t,z,\omega)\tilde{N}(dt,dz) \right]\blacksquare
 \end{dmath*}
-
+\textbf{Chứng minh định lý}\\
+Ta tìm nghiệm phương trình \eqref{eq:dn1} bằng phương pháp tách nghiệm, nghĩa là tìm nghiệm của nó dưới dạng tích
+\begin{equation}\label{eq:pt3}
+	X(t)=X_1(t^-).X_2(t^-)
+\end{equation}
+trong đó:
+\begin{itemize}
+	\item $X_1(t)$ là nghiệm của phương trình tuyến tính thuần nhất tương ứng, nghĩa là nó là nghiệm của phương trình \eqref{eq:pt2} nói trong Bổ đề.
+	\item $X_2(t)$ là nghiệm của phương trình:
+\begin{equation*}
+	dX_2(t)=A^*(t,\omega)dt+B^*(t,\omega)dW(t)+\int_{R_0}G^*(t,z,\omega)\tilde{N}(dt,dz)
+\end{equation*}
+\end{itemize}
+Với điều kiện $X_2(0)=x_0$, trong đó $A^*(t,\omega);B^*(t,\omega);G^*(t,z,\omega)$ là những hàm ta sẽ xác định sau.\\
+Theo bổ đề, ta có nghiệm $X_1(t^-)$ của phương trình \eqref{eq:pt2} cho bởi hệ thức \eqref{eq:pt1}. Áp dụng hệ quả cho tích $X(t)=X_1(t^-).X_2(t^-)$ nêu trên, ta thu được:
+\begin{dmath}
+d(X(t))=d(X_1(t^-).X_2(t^-))=X_1(t^-).dX_2(t)+X_2(t^-)dX_1(t)+\beta(t,\omega)X_1(t^-)B^*(t,\omega)dt+\int_{R_0}\gamma(t,z,\omega)X_1(t^-)G^*(t,z,\omega)\tilde{N}(dt,dz)=\alpha(t,\omega)X_1(t^-)X_2(t^-)+\beta(t,\omega)X_1(t^-)X_2(t^-)+\int_{R_0}\gamma(t,z,\omega)X_1(t^-)X_2(t^-)\tilde{N}(dt,dz)+X_1(t^-)A^*(t,\omega)dt+X_1(t^-)B^*(t,\omega)dW(t)+X_1(t^-)\int_{R}G^*(t,z,\omega)\tilde{N}(dt,dz)+\beta(t,\omega)X_1(t^-)B^*(t,\omega)dt+\gamma(t,z,\omega)X_1(t^-)G*(t,z,\omega)\tilde{N}(dt,dz)	
+\end{dmath}
+Mặt khác, $X(t)$ là nghiệm của phương trình \eqref{eq:dn1}, từ đó so sánh giữa \eqref{eq:dn1} và \eqref{eq:pt3}, ta thu được hệ phương trình:
+\begin{dmath*}
+\begin{cases}
+	A(t,\omega)=X_1(t^-)\left[A^*(t,\omega)+B(t,\omega)B^*(t,\omega)+\int\limits_{R_0}\gamma(t,z,\omega)G(t,z,\omega)v(dz) \right] \\
+	B(t,\omega)=X_1(t^-)B^*(t,\omega) \\
+	\int\limits_{R_0}G(t,z,\omega)\tilde{N}(dt,dz)=X_1(t^-)\int\limits_{R_0}(1+\gamma(t,z,\omega))G^*(t,z,\omega)\tilde{N}(dt,dz)
+\end{cases}	
+\end{dmath*}
+Suy ra:
+\begin{dmath*}
+\begin{cases}
+	A^*(t,\omega)=\dfrac{1}{X_1(t^-)} \left[A(t,\omega)-B(t,\omega)\beta(t,\omega)-\int_{R_0} \dfrac{\gamma(t,z,\omega)G(t,z,\omega)}{1+\gamma(t,z,\omega)} v(dz) \right] \\
+	B^*(t,\omega)=\dfrac{B(t,\omega)}{X_1(t^-)} \\
+	G^*(t,z,\omega)=\dfrac{G(t,z,\omega)}{X_1(t^-)(1+\gamma(t,z,\omega)}
+\end{cases}	
+\end{dmath*}
+Đặt $X_1(t)$ cho bởi hệ thức \eqref{eq:pt1}, và các biểu thức của $A^*(t,\omega);B^*(t,\omega);G^*(t,z,\omega)$ đã xác định được vào biểu thức \eqref{eq:pt3}, ta sẽ có nghiệm \eqref{eq:dn1}. $\blacksquare$\\
 \textbf{2. Một số phương trình đặc biệt}\\
 a. Phương trình Langevin\\
+\textbf{Phương trình Langevin} là phương trình có dạng:
+\begin{equation*}
+	dX(t)=-bX(t)dt+\sigma dW_t \condition{$X(0)=0$}
+\end{equation*}
+trong đó $b, \sigma$ là những hằng số thực.\\
+Phương trình Langevin là một phương trình vi phân ngẫu nhiên tuyến tính, do đó, theo kết quả phần trước ta thu được nghiệm của nó là quá trình ngẫu nhiên:
+\begin{equation*}
+	X(t)=e^{-bt}\left[X(0)+\int\limits_{0}^{t}\sigma e^{bs}dW_s \right] \condition{$t\geq 0$}
+\end{equation*}
+Quá trình xác định bởi hệ thức trên được gọi là quá trình Ornstein-Uhlenbeck.\\
+\textbf{Phương trình Langevin mở rộng} là phương trình có dạng:
+\begin{equation*}
+	dX(t)=\alpha(t)X(t)dt+\sigma (t)dW_t \condition{$X(0)=X_0$}
+\end{equation*}
+trong đó $\alpha(t)$ và $\sigma(t)$ là những quá trình ngẫu nhiên liên tục.\\
+Từ lời giải của phương trình vi phân tuyến tính tổng quát, ta sẽ có nghiệm của phương trình Langevin mở rộng là:
+\begin{equation*}
+	X(t)=\exp\left(\int\limits_{0}^{t}\alpha(s)ds \right)\left[X_0+\int\limits_{0}^{t}\exp\left(-\int\limits_{0}^{r}\alpha(s)ds \right)\sigma(r)dW_r \right]
+\end{equation*}
 b. Phương trình vi phân tuyến tính với chuyển động Brown nhiều chiều\\
 c. Phương trình Black - Scholes\\
 
