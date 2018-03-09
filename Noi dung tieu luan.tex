@@ -11,6 +11,9 @@
 \usepackage{parskip}
 \setlength{\parskip}{0.5em}
 
+%Font chữ hoa văn cho các chữ cái viết hoa
+\usepackage[mathscr]{euscript}
+
 %Điều chỉnh kích cỡ chữ cho tài liệu
 \usepackage{scrextend}
 \changefontsizes[20pt]{14pt}
@@ -255,7 +258,112 @@ Từ lời giải của phương trình vi phân tuyến tính tổng quát, ta 
 	X(t)=\exp\left(\int\limits_{0}^{t}\alpha(s)ds \right)\left[X_0+\int\limits_{0}^{t}\exp\left(-\int\limits_{0}^{r}\alpha(s)ds \right)\sigma(r)dW_r \right]
 \end{equation*}
 b. Phương trình vi phân tuyến tính với chuyển động Brown nhiều chiều\\
+Phương trình vi phân tuyến tính với chuyển động Brown nhiều chiều là phương trình có dạng:
+\begin{equation*}
+	dX(t)=[\alpha(t)X(t)+f(t)]dt+\sum_{i=1}^{m}[\beta_i(t)X(t)+g_i(t)dW_t^{(i)} \condition{$X(0)=X_0$}
+\end{equation*}
+Khi đó nghiệm của nó sẽ là:
+\begin{equation*}
+	\dfrac{X(t)}{V(t)}=X_0+\int_{0}^{t}\dfrac{1}{V(s)}\left(\alpha(s)-\sum_{i=1}^{m}[\beta_i(s)]g_i(s) \right)ds+\int_{0}^{t}\sum_{i=1}^{m}\dfrac{1}{V(s)}g_i(s)dW_{s}^{i}
+\end{equation*}
+trong đó: $V(t)=\exp\{\int_{0}^{t}[\alpha(s)-\sum_{i=1}^{m}\dfrac{1}{2}\beta_i^2(t)]ds+\int_{0}^{t}\sum_{i=1}^{m}\beta_i(s)dW_s^i \}$.\\
 c. Phương trình Black - Scholes\\
+Trong toán tài chính, người ta hay nhắc đến phương trình mô tả sự biến động giá $S(t)$ một loại cổ phiếu nào đó theo thời gian:
+\begin{equation*}
+	dS(t)=\alpha S(t)dt+\beta S(t)dW_t \condition{$S(0)=S_0$}
+\end{equation*}
+trong đó $\alpha,\beta$ là những hằng số. Đây là phương trình vi phân hình học mà ta đã nói ở phần trên, và nghiệm của nó sẽ là:
+\begin{equation*}
+	S=(t)=S_0\exp\left[\left(\alpha-\dfrac{\beta^2}{2} \right)t+\beta W_t \right]
+\end{equation*}
+Chú ý: Khi giải bài toán về định giá quyền chọn mua theo kiểu Châu Âu sẽ dẫn đến một loại phương trình đạo hàm riêng cấp hai khác với phương trình trên nhưng người ta cũng gọi là phương trình Black-Scholesm, đó là phương trình:
+\begin{equation*}
+	\dfrac{\partial G}{\partial S}+\dfrac{1}{2}\sigma^2S^2\dfrac{\partial^2G}{\partial S^2}+rS\dfrac{\partial G}{\partial S}-rG=0
+\end{equation*}
+Trong đó: $G=G(S,t)$ là giá quyền chọn tại thời điểm t; giá chứng khoán $S=S(t)$; và lãi suất không rủi ro r.\\
+\textbf{3. Ứng dụng trong tài chính}\\
+a. Bài toán về chọn danh mục đầu tư rủi ro\\
+Trước hết, ta mô hình hoá bài toán về tài sản và phương án đầu tư trên thị trường bằng các công cụ của giải tích ngẫu nhiên. Khi xét đến biến động của dòng tài sản trên thị trường, người ta thường xét đến hai loại tài sản: phi rủi ro (như trái phiếu...) và tài sản rủi ro (như cổ phiếu, bất động sản...)\\
+Loại tài sản phi rủi ro với biến động giá $X_0(t)$ được xét qua phương trình vi phân:
+\begin{equation*}
+	dX_0(t)=\lambda(t,\omega)X_0(t)dt \condition{$X_0(0)=1,t\in[0,T]$}
+\end{equation*}
+Loại tài sản rủi ro với biến động giá $X_1(t)$ thường được xét qua phương trình vi phân ngẫu nhiên Itô có dạng:
+\begin{equation}\label{eq:ud1}
+	dX_1(t)=\alpha(t,\omega)X_1(t)dt+\beta(t,\omega)X_1(t)dB_t(\omega) \condition{$X_1(0)>0,t\in[0,T]$}
+\end{equation}
+trong đó: $\lambda(t,\omega)=\lambda(t);\alpha(t,\omega)=\alpha(t);\beta(t,\omega)=\beta(t)$ là những quá trình ngẫu nhiên thoả điều kiện:
+\begin{equation*}
+	E\int\limits_{0}^{T}[|\lambda(t)|+\alpha(t)+\beta^2(t)]dt<\infty;
+\end{equation*}
+Ta ký hiệu: $\tau_0(t)=\tau_0(t,\omega);\tau_1(t)=\tau_1(t)(t,\omega);t\in[0,T];\omega\in \Omega$ là những đơn vị vốn đầu tư cho loại tài sản phi rủi ro và rủi ro tương ứng. Khi đó ta gọi: $\tau(t):=(\tau_0(t),\tau_1(t))$ là một phương án đầu tư (một danh mục đầu tư) với tổng giá trị tài sản tại thời điểm t bằng:
+\begin{equation}\label{eq:ud2}
+	V^\tau(t)=\tau_0(t)X_0(t)+\tau_1(t)X_1(t)	
+\end{equation}
+Phương án đầu tư được gọi là tự tài trợ (seft-financing) nếu ta có:
+\begin{equation}\label{eq:ud3}
+	dVT\tau(t)=\tau_0(t)dX_0(t)+\tau_1(t)dX_1(t)
+\end{equation}
+Từ giả định: $\tau(t);t\in[0,T]$ là tự tài trợ, từ hệ thức \eqref{eq:ud2} ta sẽ có:
+\begin{equation*}
+	\tau_0(t)=\dfrac{V^\tau(t)-\tau_1(t)X_1(t)}{X_0(t)}
+\end{equation*}
+Từ các hệ thức trên suy ra:
+\begin{equation*}
+	dV^\tau(t)=\lambda(t)(V^\tau(t)-\tau_1(t)X_1(t))dt+\tau_1(t)dX_1(t)
+\end{equation*}
+Sử dụng \eqref{eq:ud1}, dựa vào phương trình trên ta sẽ thu được:
+\begin{equation}\label{eq:ud4}
+	dV^\tau(t)=[\lambda(t)V^\tau(t)+(\alpha(t)-\lambda(t))\tau_1(t)X_1(t)]dt +\beta(t)\tau_1(t)X_1(t)dB_t
+\end{equation}
+Đến đây ta thấy rằng phương trình \eqref{eq:ud4} là một phương trình vi phân ngẫu nhiên tuyến tính mà ta sẽ nói đến phương pháp giải ở mục phía sau.\\
+Mặc khác, trong thực tế thường xét đến việc tìm phương án đầu tư $\tau(t);t\in[0,T]$ để thu được tổng giá trị tài sản là: $V^\tau(T)=\text{\AA}$. Đại lượng ngẫu nhiên $\text{\AA}$ tương ứng với quyền tài chính (financial claim), phương án đầu tư như vậy được gọi là phương án đáp ứng (replicating portfolio).\\
+Mở rộng vấn đề nêu trên vào trường hợp nhiều chiều, tương ứng với việc có n khối tài sản rủi ro với biến động giá $X_i(t),i=1,2,...,n$, được cho bởi:
+\begin{equation}\label{eq:ud5}
+	dX_i(t)=X_i(t^-)\left[\beta_i(t)dB_t+\int_{R_0}\gamma_i(t,x)\overline{N}(dt,dx) \right] \condition{$i=1,2,...,n$}
+\end{equation}
+trong đó $B(t)=(B_1(t),...,B_n(t))^T;t\geq 0$ là quá trình Wiener n-chiều với:
+\begin{equation*}
+	\overline{N}(dt,dx)=\left(\overline{N}_1(dt,dx_1),...,\overline{N}_n(dt,dx_n)\right)^T \condition{$x\in R_0:=R\backslash\{0\}$}
+\end{equation*}
+là độ đo ngẫu nhiên Poisson bù (compensated Poisson random measure) và còn:
+\begin{equation*}
+	\beta_i(t)=(\beta_{i_1}(t),...,\beta_{i_n}(t));\gamma_i(t,x)=(\gamma_{i_1}(t,x),...,\gamma_{i_n}(t,x))
+\end{equation*}
+là các quá trình ngẫu nhiên thoả điều kiện:
+\begin{equation*}
+	\sum_{i,j=1}^{n}\int_{0}^{T}\left[\beta_{ij}^2(t)+\int_{R_0}\gamma_{ij}^2(t,x)v(dx) \right]dt<\infty \condition{h.c}
+\end{equation*}
+Quyền $\text{\AA}$ sẽ có thể đáp ứng nếu tồn tại quá trình ngẫu nhiên:
+\begin{equation*}
+	\varphi(t)=\left(\varphi_1(t),...\varphi_n(t) \right)^T \condition{$t\geq 0$ sao cho:}\\
+\end{equation*}
+\begin{equation*}
+	\sum_{i=1}^{n}\int_{0}^{T}\varphi_i^2(t)X_i(t^-)\left[\sum_{j=1}^{n}\beta_{ij}^2(t)+\int_{R_0}\gamma_{ij}^2(t,x)v(dx) \right]dt<\infty \condition{h.c}
+\end{equation*}
+cùng với việc thoả điều kiện $\text{\AA}=E\{\text{\AA}\}+\sum\limits_{i=1}^{n}\int\limits_{0}^{T}\varphi_i(t)dX_i(t)$. Trong trường hợp này, ta nói rằng $\varphi$ là phương án đáp ứng đối với quyền tài chính.\\
+b. Giải quyết bài toán đầu tư đáp ứng\\
+Để giải quyết bài toán theo hướng đầu tư đáp ứng đã nêu, thường nó dẫn đến phương trình \eqref{eq:ud4} và \eqref{eq:ud5} mà ta xét chứng dưới dạng phương trình vi phân ngẫu nhiên tổng quát sau:\\
+\textbf{Định lý:} Cho phương trình vi phân ngẫu nhiên tuyến tính có dạng:
+\begin{dmath*}
+dX(t)=[\alpha(t)X(t^-)+\mathscr{A}(t)]dt+[\beta(t)X(t^-)+\mathscr{B}(t)]dB_t\\ +\int_{R_0}[\gamma(t,x)+\mathscr{T}(t,x)]\overline{N}(dt,dx) \condition{$X(0)=x_0$}
+\end{dmath*}
+trong đó: $\alpha(T)=\alpha(t,\omega);\beta(t)=\beta(t,\omega);\gamma(t,x)=\gamma(t,x,\omega);\mathscr{A}(t)=\mathscr{A}(t,\omega);\mathscr{B}(t)=\mathscr{B}(t,\omega);\mathscr{T}(t,x)=\mathscr{T}(t,x,\omega)$ là những quá trình ngẫu nhiên thoả các điều kiện:
+\begin{equation*}
+\begin{split}
+	&\int_{0}^{T}\left[\alpha(t)+\beta^2(t)+\int_{R_0}\gamma^2(t,x)v(dx) \right]dt<\infty\\
+	&\int_{0}^{T}\left[\mathscr{A}(t)+\mathscr{B}^2(t)+\int_{R_0}\mathscr{T}^2(t,x)v(dx) \right]dt<\infty
+\end{split}
+\end{equation*}
+Khi đó, ta sẽ có nghiệm của phương trình cho bởi hệ thức:
+\begin{dmath*}
+\dfrac{X(t)}{X_1(t^-)}=x_0+\int\limits_{0}^{t}X_1^{-1}(s^-)\left[\mathscr{A}(s)-\beta(s)\mathscr{B}(t)-\int\limits_{R_0}\dfrac{\gamma(s,x)\mathscr{T}(s,x)}{1+\gamma(s,x)}v(dx) \right]ds+\int\limits_{0}^{t}\dfrac{\mathscr{B}(s)}{X_1^{-1}(s^-)}dB(s)+\int\limits_{0}^{t}\int\limits_{R_0}\dfrac{\mathscr{T}(t,x)}{X_1(s^-)(1+\gamma(s,x))}\overline{N}(dt,dx).	
+\end{dmath*}
+trong đó:
+\begin{dmath*}
+X_1(t^-)=\exp\left\{\int_{0}^{t}\left[\alpha(s)-\dfrac{1}{2}\beta^2(t)+\int_{R_0}[\log(1+\gamma(s,x))-\gamma(s,x)]v(dx) \right]+\int_{0}^{t}\beta(s)dB(s)+\int_{R_0}\int_{0}^{t}\log(1+\gamma(s,x))\overline{N}(ds,dx) \right\}
+\end{dmath*}
+Để chứng minh định lý này ta dùng phương pháp tách nghiệm đã xét ở phần trước. Ngoài ra, để giải quyết cụ thể hơn các vấn đề về bài toán đầu tư rõ ràng ta phải xét thêm đến những loại quyền chọn cụ thể trên thị trường (quyền chọn Châu Âu, quyền chọn Châu Á...). Việc xem xét và giải chúng trong một vài trường hợp đã cho ta những kết quả nhất định như các kết quả kinh điển của Black-Scholes, Floyd B. Hanson.\\
 
 \textbf{Quyển "Quá trình ngẫu nhiên - Phần 1"}\\
 \textbf{1. Khái niệm về phương trình vi phân ngẫu nhiên}\\
