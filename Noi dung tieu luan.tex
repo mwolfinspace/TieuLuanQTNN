@@ -11,6 +11,9 @@
 \usepackage{parskip}
 \setlength{\parskip}{0.5em}
 
+%Đánh dấu đầu dòng bằng chữ a) b) c)
+\usepackage[shortlabels]{enumitem}
+
 %Font chữ hoa văn cho các chữ cái viết hoa
 \usepackage[mathscr]{euscript}
 
@@ -367,6 +370,51 @@ X_1(t^-)=\exp\left\{\int_{0}^{t}\left[\alpha(s)-\dfrac{1}{2}\beta^2(t)+\int_{R_0
 
 \textbf{Quyển "Quá trình ngẫu nhiên - Phần 1"}\\
 \textbf{1. Khái niệm về phương trình vi phân ngẫu nhiên}\\
+\textbf{Điều kiện 3.1.1:} Về sự tồn tại và duy nhất nghiệm\\
+Ta xét phương trình vi phân ngẫu nhiên trong các điều kiện sau:\\
+(1) Không gian xác suất $(\Omega,\mathscr{F},P)$ với $\sigma$ - trường $\{\mathscr{F}_t,i\in [0,T]\}$\\
+(2) Quá trình Wiener $m$ - chiều $W(t)=\left\{W^{(1)}(t),W^{(2)},...,W^{(m)}(t) \right\}$ thích nghi với họ $\sigma$ - trường $\{\mathscr{F}_t,t\in [0,T] \}$ (điều đó có nghĩa là $W(0)=0;\forall t\in[0,T]$ đại lượng $W(t)\mathscr{F}_t$ - đo được và số gia $W(t+s)-W(t)$ khi $s\geq0$ không phụ thuộc vào $\sigma$ - trường $\mathscr{F}_t$).\\
+(3) $\xi_0$ là vectơ ngẫu nhiên $\mathscr{F}_0$ - đo được và vectơ $\xi_0$ không phụ thuộc vào quá trình $W(t)$.\\
+(4) Các hàm số $a(t,x)$ và $\delta(t,x)\left(t\in [0,T];x\in R^m \right)$ nhận các giá trị trong $R^m$ và $\mathscr{L}(R^m)$ tương ứng, với $\mathscr{L}(R^m)$ là tập các toán tự tuyến tính từ $R^m$.\\
+\textbf{Dạng của phương trình vi phân ngẫu nhiên:}\\
+\begin{equation}\label{eq:c3e1}
+	d\xi(t)=a(t,\xi(t))dt+\delta(t,\xi(t))dW(t)
+\end{equation}
+với điều kiện ban đầu: $\xi(0)=\xi_0$\\
+Phương trình \eqref{eq:c3e1} có thể viết dưới dạng tích phân:
+\begin{equation*}
+	\xi(t)=\xi_0+\int_{0}^{t}a(s,\xi(s))ds+\int_{0}^{t}\delta(s,\xi(s))dW(s) \condition{$t\in[0,T]$}
+\end{equation*}
+trong đó $\xi(t)$ là quá trình ngẫu nhiên cần tìm. Nghiệm của phương trình \eqref{eq:c3e1} với điều kiện ban đầu $\xi(0)=\xi_0$ là quá trình ngẫu nhiên m - chiều $\xi(t),t\in[0,T]$ sao cho:\\
+\begin{enumerate}[a)]
+	\item Quá trình $\xi(t)$ đo được dần đối với họ $\sigma$ - trường $\{\mathscr{F}_t,t\in[0,T]\}$
+	\item Mọi toạ độ của vectơ ngẫu nhiên $\left\{a(t,\xi(t)),t\in[0,T] \right\}$ khả tích tuyệt đối trên đoạn $[0,T]$ với xác suất 1.
+	\item Mọi phần tử của ma trận ngẫu nhiên $\left\{\delta(t,\xi(t)),t\in[0,T] \right\}$ bình phương khả tích trên đoạn $[0,T]$ với xác suất 1.
+	\item Quá trình $\xi(t)$ có vi phân ngẫu nhiên xác định bởi 
+\begin{center}
+	$d\xi(t)=a(t,\xi(t))dt+\delta(t,\xi(t))dW(t)$ và $\xi(0)=\xi_0$
+\end{center}
+\end{enumerate}
+Chú ý rằng khi $\delta(t,x)=0$ thì phương trình \eqref{eq:c3e1} sẽ là phương trình vi phân thường, thoả điều kiện ngẫu nhiên ban đầu. Như vậy ta sẽ giải phương trình vi phân thường với mỗi $\omega$ xác định.\\
+Ta nói rằng phương trình \eqref{eq:c3e1} có nghiệm duy nhất nếu đối với 2 nghiệm bất kỳ $\xi_1(t),\xi_2(t)$ ta có hệ thức:\\
+\begin{equation*}
+	P\left\{\sup_{0\leq t\leq T}|\xi_1(t)-\xi_2(t)|>0 \right\}=0
+\end{equation*}
+Ta làm quen với định lý tồn tại và duy nhất nghiệm.\\
+\textbf{ĐỊNH LÝ 3.1.2}\\
+Giả sử các hệ số của phương trình \eqref{eq:c3e1} thoả các điều kiện:
+\begin{enumerate}[(1)]
+	\item Với mọi $t\in[0,T],x\in R^m$ ta có:
+\begin{equation*}
+	|a(t,x)|^2+|\delta(t,x)|^2\leq k(1+|x|^2)
+\end{equation*}
+trong đó k là một hằng số; còn $|\delta(t,x)|^2=\sum\limits_{i,j=1}^m(\delta^{ij}(t,x))^2\delta^{ij}(t,x)$ là các phần tử của ma trận $\delta(t,x)$
+	\item Với mọi $R>0$, tồn tại hằng số $c_R$ sao cho, với $|x|\leq R;y\leq R$ và $t\in[0,T]$ ta sẽ có:
+\begin{equation*}
+	|a(t,x)-a(t,y)|^2+|\delta(t,x)-\delta(t,y)|^2\leq c_R|x-y|^2
+\end{equation*}
+Khi đó sẽ tồn tại duy nhất nghiệm liên tục $\xi(t),t\in[0,T]$ của phương trình \eqref{eq:c3e1}. Chứng minh định lý trong quyển \textbf{Stochastic Differential Equations - An Introduction with Application} của B. Oksendal.
+\end{enumerate}
 \textbf{2. Một số phương trình đặc biệt}\\
 
 \textbf{Quyển "Quá trình ngẫu nhiên - Phần 2"}\\
