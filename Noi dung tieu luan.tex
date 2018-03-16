@@ -415,6 +415,60 @@ trong đó k là một hằng số; còn $|\delta(t,x)|^2=\sum\limits_{i,j=1}^m(
 \end{equation*}
 Khi đó sẽ tồn tại duy nhất nghiệm liên tục $\xi(t),t\in[0,T]$ của phương trình \eqref{eq:c3e1}. Chứng minh định lý trong quyển \textbf{Stochastic Differential Equations - An Introduction with Application} của B. Oksendal.
 \end{enumerate}
+Mặc khác ta thấy rằng nghiệm của phương trình \eqref{eq:c3e1} có thể xác định bằng phương pháp xấp xỉ liên tiếp như sau:\\
+Giả sử các hệ số $a(t,x),\delta(t,x)$ thoả điều kiện (1) của định lý 3.1.1 và điều kiện (2*) tồn tại hằng số $c>0$ sao cho $\forall t\in[0,T],x,y\in R^m$
+\begin{equation*}
+	|a(t,x)-a(t,y)|^2+|\delta(t,x)-\delta(t,y)|^2\leq c|x-y|^2
+\end{equation*}
+Ngoài ra ta còn giả định rằng $M|\xi_0|^2<\infty$. Khi đó, đặt $\eta_0(t)=\xi_0$ và:
+\begin{equation*}
+	\eta_{n+1}(t)=\xi_0+\int_{0}^ta(s,\eta_n(s))ds+\int_0^t\delta(s,\eta_n(s))dW(s) \condition{n=1,2,...}
+\end{equation*}
+Sau khi bộ sung thêm những mệnh đề phụ trợ ta sẽ có được bất đẳng thức:
+\begin{equation*}
+	E\sup_{0\leq t\leq T}|\eta_{n+1}(t)-\eta_n(t)|^2\leq\frac{M^nT^n}{n!} \condition{n=0,1,2,...}
+\end{equation*}
+trong đó M là một hằng số nào đó.\\
+Các bất đẳng thức trên cho ta kết luận được rằng chuỗi:
+\begin{equation*}
+	\eta_0(t)+\sum_{n=0}^\infty(\eta_{n+1}(t)-\eta_n(t))
+\end{equation*}
+hội tụ đều với xác suất 1, nó chính là nghiệm của phương trình \eqref{eq:c3e1} khi các hệ số của phương trình thoả các điều kiện (1), (2) và điều kiện ban đầu $M|\xi_0|^2<\infty$.\\
+Nếu các điều kiện của định lý 3.1.2 được thoả và $M|\xi_0|^{2p}<\infty$ với một số p nguyên bất kỳ thì nghiệm của phương trình \eqref{eq:c3e1} với điều kiện ban đầu $\xi_p$ thoả điều kiện $E|\xi(t)|^{2p}\leq k_p(1+E|\xi_0|^{2p})$ với $t\in[0,T]$ và $E|\xi(t)-\xi_0|^{2p}\leq k'_p(1+E|\xi_0|^{2p})$ với $t\in[0,T]$, trong đó $k_p,k'_p$ là những hằng số chỉ phụ thuộc vào $p,k$ và $T$.\\
+Trong các điều kiện của định lý 3.1.2, nghiệm $\xi(t),t\in[0,T]$ của phương trình \eqref{eq:c3e1} có tính chất Markov đối với họ $\sigma$ - trường ${\mathscr{F}_t,t\in[0,T]}$. Điều đó đồng nghĩa với mọi $0\leq s\leq t\leq R,G\in \mathscr{B},\mathscr{B}$ là $\sigma$ - trường các tập Borel của $R^m$, với xác suất 1 ta sẽ có hệ thức:
+\begin{equation*}
+	P\{\xi(t)\in G/\mathscr{F}_s\}=P\{\xi(t)\in G/\xi(\mathscr{F})\}
+\end{equation*}
+Như vậy quá trình ngẫu nhiên $\xi(t),t\in[0,T]$ là một hàm ngẫu nhiên Markov với phân phối ban đầu:
+\begin{equation*}
+	\mu(G)=P\{\xi_0\in G\},G\in \mathscr{B}
+\end{equation*}
+Xác suất chuyển $p(s,x,t,G)$ của hàm ngẫu nhiên Markov $\xi(t)$ xác định bởi công thức:
+\begin{equation*}
+	p(s,x,t,G)=P\{\xi_{sx}(t)\in G\},0\leq s\leq t\leq T \condition{$x\in R^m,G\in\mathscr{B}$}
+\end{equation*}
+trong đó $\xi_{sx}(t)$ là nghiệm của phương trình:
+\begin{equation}\label{eq:c3e2}
+	\xi_{sx}(t)=x+\int_{s}^{t}a(\tau,\xi_{sx}(\tau))d\tau+\int_{s}^{t}\delta(\tau,\xi_{sx}(\tau))dW(\tau)
+\end{equation}
+Trong \eqref{eq:c3e2}, x là vectơ ngẫu nhiên trong $R^m,t\in[s,T]$\\
+\textbf{Định lý 3.1.3}\\
+Giả sử các hàm số $a(t,x)$ và $\delta(t,x)$ thoả các điều kiện của định lý 3.1.2, ngoài ra chúng là những hàm liên tục theo tập hợp các biến số. Khi đó quá trình ngẫu nhiên $\xi(t),t\in[0,T]$ là nghiệm của phương trình \eqref{eq:c3e1} sẽ là một quá trình khuếch tán với vectơ chuyển dịch $a(t,x)$ và ma trận khuếch tán:
+\begin{equation*}
+	B(t,x)=\delta(t,x)\delta^T(t,x)
+\end{equation*}
+Như vậy, lý thuyết về quá trình vi phân ngẫu nhiên cho ta khả năng xây dựng các quá trình khuếch tán trong những điều kiện khá rộng đối với các hệ số $a(t,x)$ và $B(t,x)$.\\
+Ngoài ra, nếu bổ sung thêm về tính trơn của các hàm $a(t,x),\delta(t,x)$ ta có thể chứng minh sự tồn tại đạo hàm liên tục của hàm số:
+\begin{equation*}
+	u(s,x)=E\mathscr{f}(\xi_{sx}(t)),0\leq s\leq t\leq T,x\in R^m
+\end{equation*}
+theo biến x, khi đó ta sẽ thu được phương trình ngược Kolmogorov.\\
+\textbf{Định lý 3.1.4}
+Giả sử các hàm số $a(t,x)$ và $\delta(t,x)$ thoả điều kiện của định lý 3.1.2, chúng là những hàm liên tục và khả vi 2 lần theo biến $x$. Ngoài ra, với những số xác định $p>0$ và $k>0$ ta có bất đẳng thức:
+\begin{dmath*}
+	\sum\limits_{t,k=1}^{m}\left|\dfrac{\partial a^i(t,x)}{\partial x^k}\right|+\sum\limits_{i,j,k=1}^{m}\left|\dfrac{\partial^2a^i(t,x)}{\partial x^i\partial x^k}\right|+\sum_{i,j,k=1}^{m}\left|\dfrac{\partial\delta^{ij}(t,x)}{\partial x^k} \right|+\sum_{i,j,k,l=1}^{m}\left|\dfrac{\partial^2\delta^{ij}(t,x)}{\partial x^k\partial x^l} \right|\leq k(1+|x|^p)	
+\end{dmath*}
+
 \textbf{2. Một số phương trình đặc biệt}\\
 
 \textbf{Quyển "Quá trình ngẫu nhiên - Phần 2"}\\
