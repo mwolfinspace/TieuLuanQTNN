@@ -82,6 +82,31 @@
   tabsize=3
 }
 
+%Mở tính năng đánh dấu công thức trong đoạn văn
+\makeatletter
+\newcommand*{\inlineequation}[2][]{%
+  \begingroup
+    % Put \refstepcounter at the beginning, because
+    % package `hyperref' sets the anchor here.
+    \refstepcounter{equation}%
+    \ifx\\#1\\%
+    \else
+      \label{#1}%
+    \fi
+    % prevent line breaks inside equation
+    \relpenalty=10000 %
+    \binoppenalty=10000 %
+    \ensuremath{%
+      % \displaystyle % larger fractions, ...
+      #2%
+    }%
+    ~\@eqnnum
+  \endgroup
+}
+\makeatother
+
+\usepackage{hyperref}
+
 %Phần chọn font chèn câu lệnh giữa đoạn
 \newenvironment{code}{\ttfamily}{\par}
 \DeclareTextFontCommand{\chuyencode}{\code}
@@ -470,10 +495,93 @@ Giả sử các hàm số $a(t,x)$ và $\delta(t,x)$ thoả điều kiện của
 \end{dmath*}
 khi đó nếu hàm $f(x),(x\in R^m)$ khả vi liên tục hai lần với các giá trị thực sao cho:
 \begin{equation*}
-	
+	\left|f(x)\right|+\sum_{i=1}^{m}\left|\dfrac{\partial f(x)}{\partial x^2} \right|+\sum_{i,k=1}^{m}\left|\dfrac{\partial^2f(x)}{\partial x^i \partial x^k}\leq k(1+|x|^p \right| \condition{p>0}
 \end{equation*}
+ta sẽ có hàm:
+\begin{equation*}
+	u(s,x)=Ef(\xi_{sx}(t)),0\leq s\leq t \leq T,x\in R^m
+\end{equation*}
+trong đó $\xi_{sx}(t)$ là nghiệm của phương trình \eqref{eq:c3e2}, hai lần khả vi theo x, khả vi liên tục theo s và thoả phương trình:
+\begin{equation*}
+	\dfrac{\partial u(s,x)}{\partial s}+\sum_{i=1}^{m}a^i(s,x)\dfrac{\partial u(s,x)}{\partial x^2}+\dfrac{1}{2}\sum_{i,j,k=1}^{m}\delta^{ij}(s,x)\delta^{kj}(s,x)\dfrac{\partial^2u(s,x)}{\partial x^i\partial x^k}=0
+\end{equation*}
+trong miền $s\in(0,t),x\in R^m$ với điều kiện ban đầu là $\lim\limits_{s\rightarrow t}u(s,x)=f(x)$.\\
+Hệ quả của định lý trên là sự tồn tại và duy nhất nghiệm của bài toán Cauchy đối với phương trình đạo hàm riêng dạng parabolic.\\
+\textbf{Định lý 3.1.5}\\
+Giả sử trong miền $0\leq s<T;x\in R^m$, xác định một toán tử vi phân
+\begin{equation*}
+	\mathscr{L}u(s,x)=\dfrac{\partial u}{\partial s}(s,x)+\sum_{i=1}^{m}a^i(s,x)\dfrac{\partial u(s,x)}{\partial x^i}+\dfrac{1}{2}\sum_{i,j=1}^{m}b^{ij}(s,x)\dfrac{\partial^2u(s,x)}{\partial x^i\partial x^j}
+\end{equation*}
+dạng parabolic. Nếu ma trận $B(t,x)$ với các phần tử $b^{ij}(t,x);i,j=1,2,...,m$ sao cho $B(t,x)=\delta(t,x)\delta^T(t,x)$ và các hàm $a(t,x),\delta(t,x)$ thoả điều kiện của định lý 3.1.4 thì khi đó bài toán Cauchy với:
+\begin{equation*}
+	\mathscr{L}u(s,x)=0,\lim\limits_{s\rightarrow T}u(s,x)=f(x)
+\end{equation*} 
+sẽ có nghiệm duy nhất với mọi hàm khả vi liên tục hai lần $f(x)$ đồng thời nó cùng với các đạo hàm riêng cho đến bậc hai của nó tăng đến vô cực không nhanh hơn một bậc nào bất kỳ của $|x|$. Trong trường hợp này, nghiệm $u(s,x)$ của bài toán Cauchy sẽ được biểu diễn dưới dạng:
+\begin{equation*}
+	u(s,x)=Ef(\xi_{sx}(t)),0\leq s<T,x\in R^m
+\end{equation*}
+với $\xi_{sx}(t),(t\in[s,T])$ là nghiệm của phương trình \eqref{eq:c3e2}\\
+Định lý này chỉ ra rằng khi nghiên cứu về phương trình đạo hàm riêng dạng parabolic ta có thể sử dụng các kết quả của lý thuyết về phương trình vi phân ngẫu nhiên. Đặc biệt trong định lý 3.1.5 không đòi hỏi tính không suy biến của ma trận $B(t,x)$.\\
+\textbf{Định nghĩa 3.1.6: Nghiệm mạnh và nghiệm yếu}\\
+Nghiệm đã xác định trong định lý tồn tại và duy nhất 3.1.2 được gọi là một nghiệm mạnh vì các cơ sở sau đã được xác định trước
+\begin{enumerate}[1)]
+	\item Không gian xác suất cơ bản $(\Omega,\mathscr{F},P)$
+	\item Họ các $\sigma$ - trường con đầy đủ của $\mathscr{F}:\{\mathscr{F}_t,t\in[0,1]\}$
+	\item Quá trình Wiener $\{W_t,t\in[0,T]\}$ đã xác định sao cho $\{W_t,\mathscr{F}_t,t\in[0,T]\}$ lập thành Martingan.
+\end{enumerate}
+Khi chỉ cho trước các hàm $a(t,x)$ và $\delta(t,x)$ mà không cho trước ba yếu tố trên ta sẽ có nghiệm theo nghĩa yếu. Hay nói cách khác, phương trình:
+\begin{equation*}
+	d\xi_t=a(t,\xi)dt+\delta(t,\xi)dW(t)
+\end{equation*}
+được gọi là có nghiệm yếu nếu tìm được
+\begin{enumerate}[(1*)]
+	\item Không gian xác suất $(\Omega^*,\mathscr{F}^*,P^*)$
+	\item Họ các $\sigma$ - trường con đầy đủ của $\mathscr{F}^*:\{\mathscr{F}^*_t,t\in[0,1]\}$
+	\item Quá trình Wiener $\{W_t^*,t\in[0,T]\}$ sao cho $\{W_t^*,\mathscr{F}^8_t,t\in[0,T]\}$ lập thành Martingan.
+	\item $\{\xi_t^*,\mathscr{F}_t^*,t\in[0,T]\}$ là một quá trình liên tục và thích nghi (tương thích) sao cho:
+	\begin{equation*}
+		d\xi_t^*=a(t,\xi)dt+\delta(t,\xi)dW(t)	
+	\end{equation*}
+\end{enumerate}
+Như vậy ta nói rằng $\{\xi_t^*,t\in[0,T]\}$ là nghiệm yếu của phương trình vi phân ngẫu nhiên đã cho. Điều kiện ban đầu của nghiệm yếu là hàm phân phối xác suất $F$ cho trước, ta phải tìm nghiệm yếu sao cho $\xi_0^*$ có hàm phân phối bằng $F$.\\
+\textbf{Chú ý:}
+\begin{itemize}[*]
+	\item Tính duy nhất của nghiệm mạnh được hiểu theo nghĩa có cùng quỹ đạo.
+	\item Tính duy nhất của nghiệm yếu được hiểu theo nghĩa có cùng phân phối xác suất.
+	\item Tên gọi nghiệm mạnh và nghiệm yếu được đặt ra vì nghiệm mạnh sẽ là nghiệm yếu, nhưng nghiệm yếu không thể trở thành nghiệm mạnh.
+\end{itemize}
 \textbf{2. Một số phương trình đặc biệt}\\
-
+\textbf{Định nghĩa 3.2.1: Phương trình vi phân tuyến tính thuần nhất}\\
+Phương trình vi phân ngẫu nhiên tuyến tính thuần nhất là phương trình có dạng:
+\begin{equation}\label{eq:c3.2.1}
+	d\xi(t)=\alpha(t)\xi(t)dt+\beta(t)\xi(t)dW_t
+\end{equation} 
+trong đó $\alpha(t),\beta(t)$ là các hàm số của t và $W_t$ là quá trình Wiener với điều kiện ban đầu $\xi(0)=\xi_0$\\
+\textbf{Cách giải:} Trước tiên ta tìm phương pháp giải \eqref{eq:c3.2.1} trong trường hợp đặc biệt khi $\alpha(t)=0$. Cụ thể xét các ví dụ sau:\\
+a) Giải phương trình: \inlineequation[eq:c3.2.2]{\begin{cases} d\xi(t)=\beta(t)\xi(t)dW_t \\ \xi(0)=1 \end{cases}}\\
+Ta xét quá trình: \inlineequation[eq:c3.2.3]{\eta(t):=-\dfrac{1}{2}\int_{0}^{t}\beta^2(s)ds+\int_{0}^{t}\beta(s)dW_s} với vi phân tương ứng là: $d\eta=-\dfrac{1}{2}\beta^2(t)dt+\beta(t)dW_t$.\\
+Sử dụng công thức Itô với $\varphi(t,x)=e^x$ ta sẽ có:
+\begin{dmath*}
+d\xi(t)=d\varphi(t,\eta_t)=\dfrac{\partial\varphi}{\partial x}d\eta+\dfrac{1}{2}\dfrac{\partial\varphi^2}{\partial x^2}\beta^2(t)dt=e^\eta(-\dfrac{1}{2}\beta^2(t)dt+\beta(t)dW_t+\dfrac{1}{2}\beta^2(t)dt)=\beta(t)\xi(t)dW_t
+\end{dmath*}
+Từ đó, theo \eqref{eq:c3.2.3} ta sẽ có nghiệm của phương trình \eqref{eq:c3.2.2} là:
+\begin{equation*}
+	\xi(t)=\exp\left\{-\dfrac{1}{2}\int_{0}^{t}\beta^2(s)ds+\int_{0}^{t}\beta(s)sW_s \right\}
+\end{equation*}
+Nếu ta thay điều kiện ban đầu $\xi(0)=1$ bởi điều kiện $\xi(0)=\xi_0$ ta sẽ có nghiệm của phương trình: \inlineequation[eq:c3.2.4]{\begin{cases}
+	d\xi(t)=\beta(t)\xi(t)dW_t\\
+	\xi(0)=\xi_0
+\end{cases}} là quá trình ngẫu nhiên:
+\begin{equation}\label{eq:c3.2.5}
+	\xi(t)=\xi_0\exp\left\{\int_{0}^{t}\beta(s)dW_s-\dfrac{1}{2}\int_{0}^{t}\beta^2(s)ds \right\}
+\end{equation}
+b) Giải phương trình
+\begin{equation}\label{eq:c3.2.6}
+\begin{cases}
+	d\xi(t)=\alpha(t)\xi(t)dt+\beta(t)\xi(t)dt\\
+	\xi(0)=\xi_0
+\end{cases}
+\end{equation}
 \textbf{Quyển "Quá trình ngẫu nhiên - Phần 2"}\\
 \textbf{Giải phương trình vi phân tuyến tính Itô - Levy}\\
 
