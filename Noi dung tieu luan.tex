@@ -582,9 +582,204 @@ b) Giải phương trình
 	\xi(0)=\xi_0
 \end{cases}
 \end{equation}
+Ta tìm nghiệm của \eqref{eq:c3.2.6} dưới dạng: $\xi(t)=\xi_1(t).\xi_2(t)$ trong đó $\xi_1(t)$ thoả điều kiện: \inlineequation[eq:c3.2.7]{\begin{cases}
+	d\xi_1(t)=\beta(t)\xi_1(t)dW_t\\
+	\xi_1(0)=1
+\end{cases}} và $\xi_2(t)$ thoả điều kiện: 
+\begin{equation}\label{eq:c3.2.8}
+\begin{cases}
+	d\xi_2(t)=A(t)dt+B(t)dW_t\\
+	\xi_2(0)=1
+\end{cases}
+\end{equation} với $A(t)$ và $B(t)$ là những hàm ta sẽ chọn sau này.\\
+Khi đó ta có:
+\begin{dmath*}
+d\xi(t)=d(\xi_1,\xi_2)=\xi_1d\xi_2+\xi_2d\xi_1+\beta(t)\xi_1B(t)dt=\beta(t)\xi(t)dW_t+\xi_1d\xi_2+\beta(t)\xi_1B(t)dt	
+\end{dmath*}
+Ta chọn $A(t)$ và $B(t)$ sao cho:
+\begin{equation*}
+	d\xi_2(t)+\beta(t)B(t)dt=\alpha(t)\xi_2(t)dt
+\end{equation*}
+Cụ thể ta lấy: $A(t)=\alpha(t)\xi_2(t)$ và $B(t)=0$.\\
+Từ hệ thức \eqref{eq:c3.2.8} sẽ cho ta:
+\begin{equation}\label{eq:c3.2.9}
+	\begin{cases}
+		d\xi_2(t)=\alpha(t)\xi_2(t)dt\\
+		\xi_2(0)=1
+	\end{cases}
+\end{equation}
+Từ \eqref{eq:c3.2.9} sẽ cho ta:
+\begin{equation*}
+	\xi_2(t)=\exp\left(\int_{0}^{t}\alpha(s)ds \right)
+\end{equation*}
+Mặt khác theo phần a), phương trình \eqref{eq:c3.2.7} cho ta nghiệm là:
+\begin{equation*}
+	\xi_1(t)=\xi_0\exp\left\{\int_{0}^{t}\beta(s)dW_s-\dfrac{1}{2}\int_{0}^{t}\beta^2(s)ds \right\}
+\end{equation*}
+Kết hợp $\xi_1(t)$ và $\xi_2(t)$ ta có nghiệm của phương trình \eqref{eq:c3.2.6} là:
+\begin{equation}\label{eq:c3.2.10}
+	\xi(t)=\xi_1(t)\xi_2(t)=\exp\left\{\int_{0}^{t}\beta(s)dW_s+\int_{0}^{t}\left[\alpha(s)-\dfrac{1}{2}\beta^2(s) \right]ds\right\}
+\end{equation}
+\textbf{c) Phương trình Black-Scholes}\\
+Phương trình mô tả sự biến động của giá cổ phiếu $S_t$ theo thời gian t:
+\begin{equation}\label{eq:c3.2.11}
+	dS_t=\alpha S_tdt+\beta S_tdW_t
+\end{equation}
+trong đó $\alpha$ và $\beta$ là những hằng số.\\
+Đây là trường hợp đặt biệt của phương trình dạng \eqref{eq:c3.2.1}. Do đó từ \eqref{eq:c3.2.10} ta suy ra nghiệm của nó sẽ là:
+\begin{equation}\label{eq:c3.2.12}
+	S_t=\exp\left[\left(\alpha-\dfrac{\beta^2}{2} \right)t+\beta W_t \right]
+\end{equation}
+\textbf{d) Phương trình mũ Itô}\\
+Dạng của phương trình như sau:
+\begin{equation}\label{eq:c3.2.13}
+	\begin{cases}
+		dX(t)=\dfrac{1}{2}X(t)dt+X(t)dW_t\\
+		X(0)=X_0
+	\end{cases}
+\end{equation}
+Từ \eqref{eq:c3.2.10} ta suy ra nghiệm của nó sẽ là: $X(t)=X_0exp(W_t)$\\
+\textbf{Định nghĩa 3.2.2: Phương trình vi phân tuyến tính dạng tổng quát}\\
+Phương trình vi phân tuyến tính là phương trình có dạng
+\begin{equation}\label{eq:c3.2.14}
+	d\xi(t)=(\alpha(t)\xi(t)+f(t))dt+(\beta(t)\xi(t)+g(t))dW_t
+\end{equation}
+trong đó $\alpha(t),\beta(t),f(t),g(t)$ là những hàm của t và $W_t$ là quá trình Wiener với điều kiện ban đầu $\xi(0)=\xi_0$.\\
+\textbf{Cách giải:} Ta tìm nghiệm của phương trình \eqref{eq:c3.2.14} dưới dạng: $\xi(t)=\xi_1(t)\xi_2(t)$, trong đó $\xi_1(t)$ là nghiệm của phương trình tuyến tính thuần nhất tương ứng.
+\begin{equation}\label{eq:c3.2.15}
+	\begin{cases}
+		d\xi_1(t)=\alpha(t)\xi_1(t)dt+\beta(t)\xi_1(t)dW_t\\
+		\xi_1(0)=1
+	\end{cases}
+\end{equation}
+và $\xi_2(t)$ là nghiệm của phương trình:
+\begin{equation*}
+	\begin{cases}
+		d\xi_2(t)=A(t)dt+B(t)dW_t\\
+		\xi_2(0)=\xi_0
+	\end{cases}
+\end{equation*}
+Hàm $A(t)$ và $B(t)$ ta sẽ chọn sau này. Khi đó ta có:
+\begin{equation*}
+	d\xi(t)=d(\xi_1(t)\xi_2(t))=\xi_1d\xi_2+\xi_2d\xi_1+\beta(t)\xi_1B(t)dt
+\end{equation*}
+Cụ thể ta chọn $A(t)$ và $B(t)$ sao cho:
+\begin{equation*}
+	\xi_1(t)[A(t)dt+B(t)dW_t]+\beta(t)\xi_1(t)B(t)dt=f(t)dt+g(t)dW_t
+\end{equation*}
+ta sẽ thu được: \inlineequation[eq:c3.2.16]{\begin{cases}
+	A(t):=[f(t)-\beta(t)g(t)]\dfrac
+	{1}{\xi_1(t)}\\
+	B(t):=g(t)\dfrac{1}{\xi_1(t)}
+\end{cases}}\\
+Sử dụng kết quả ở phần b), theo công thức \eqref{eq:c3.2.14} ta có:
+\begin{equation*}
+	\xi_1(t)=\exp\left\{\int_{0}^{t}\beta(s)dW_s+\int_{0}^{t}\left[\alpha(s)-\dfrac{1}{2}\beta^2(s) \right]ds \right\}
+\end{equation*}
+Theo \eqref{eq:c3.2.16} ta có:
+\begin{equation*}
+	\xi_2(t)=\xi_0+\int_{0}^{t}[f(s)-\beta(s)g(s)](\xi_1(s))^{-1}ds+\int_{0}^{t}g(s)(\xi_1(s))^{-1}dW_s
+\end{equation*}
+Kết hợp $\xi_1(t)$ và $\xi_2(t)$ ta có nghiệm của phương trình \eqref{eq:c3.2.14} sẽ là:
+\begin{equation*}
+	\xi(t)=\xi_1(t)\xi_2(t)
+\end{equation*}
+\textbf{Định nghĩa 3.2.3: Phương trình Langevin}\\
+Phương trình Langevin là phương trình có dạng:
+\begin{equation}\label{eq:c3.2.17}
+	\begin{cases}
+		d\xi(t)=-b\xi(t)dt+\delta dW_t\\
+		\xi(0)=\xi_0
+	\end{cases}
+\end{equation}
+trong đó $b,\delta$ là những hằng số thực.\\
+Phương trình Langevin là một phương trình tuyến tính, do đó áp dụng kết quả phần II, theo công thức \eqref{eq:c3.2.17} ta thu được nghiệm của nó là phương trình ngẫu nhiên:
+\begin{equation}\label{eq:c3.2.18}
+	\xi(t)=e^{-bt}\left[\xi_0+\int{0}^{t}\delta e^{bs}dW_s \right] \condition{$t\geq 0$}
+\end{equation}
+Khi đó quá trình xác định bởi \eqref{eq:c3.2.18} được gọi là quá trình Ornstein-Unlenbeck.\\
+\textbf{Định nghĩa 3.2.4: Phương trình Langevin mở rộng}\\
+Phương trình Langevin mở rộng là phương trình có dạng:
+\begin{equation}\label{eq:c3.2.19}
+	\begin{cases}
+		d\xi(t)=\alpha(t)\xi(t)dt+\delta(t)dW_t\\
+		\xi(0)=\xi_0
+	\end{cases}
+\end{equation}
+trong đó $\alpha(t)$ là một quá trình liên tục thích nghi.\\
+Từ lời giải của phương trình vi phân tuyến tính tổng quát ta sẽ có nghiệm của phương trình Langevin mở rộng là:
+\begin{equation}\label{eq:c3.2.20}
+	\xi(t)=\exp\left(\int_{0}^{t}\alpha(s)ds\right)\left[\xi_0+\int_{0}^{t}\exp\left(-\int_{0}^{r}\alpha(s)ds \right)\delta(r)dW_r \right]
+\end{equation}
+Xét phương trình tuyến tính có dạng:
+\begin{equation}\label{eq:c3.2.21}
+	\begin{cases}
+		d\xi(t)=\alpha(t)\xi(t)+f(t)]dt+\sum\limits_{i=1}^{m}\left[\beta^i(t)\xi(t)+g^i(t)\right]dW_t^i\\
+		\xi(0)=\xi_0
+	\end{cases}
+\end{equation}
+Khi đó nghiệm của nó sẽ là:
+\begin{dmath}\label{eq:c3.2.22}
+\xi(t)=G(t)\left[\xi_0+\int_{0}^{t}\left(G(s)\right)^{-1}\left(\alpha(s)-\sum\beta^i(s)g^i(s)\right)ds \right]+\int_{0}^{t}\sum\limits_{i=1}^{m}(G(s))^{-1}g^i(s)dW_t^i	
+\end{dmath}
+trong đó:
+\begin{equation*}
+	G(t):=\exp\left(\int_{0}^{t}\left[\alpha(s)-\sum_{i=1}^{m}\dfrac{(\beta^i)^2}{2} \right]ds+\int_{0}^{t}\sum_{i=1}^{m}\beta^i(s)dW_s^i \right)
+\end{equation*}
 \textbf{Quyển "Quá trình ngẫu nhiên - Phần 2"}\\
 \textbf{Giải phương trình vi phân tuyến tính Itô - Levy}\\
-
+\textbf{Định lý 4.4.1:}\\
+Cho phương trình vi phân ngẫu nhiên Itô - Levy dạng:
+\begin{dmath}\label{eq:4.4.1}
+	dX(t)=[\alpha(t,\omega)X(t^-)+A(t,\omega)]dt+[\beta(t,\omega)X(t^-)+B(t,\omega)]dW(t)+\int_{R_0}[\gamma(t,z,\omega)X(t^-)+G(t,z,\omega)]\tilde{N}(dt,dz)
+\end{dmath}
+với điều kiện ban đầu $X(0)=x_0$. Trong đó:
+\begin{equation*}
+	\alpha(t,\omega);\beta(t,\omega);A(T,\omega);B(t,\omega);\gamma(t,z,\omega);G(t,z,\omega);t\geq 0;z\in R_0;\omega\in \Omega
+\end{equation*}
+là những quá trình ngẫu nhiên khả đoán cho trước với
+\begin{equation*}
+	\gamma(t,z,\omega)>-1;\forall(t,z,\omega)\in[0,\infty)\times R_0\times \Omega
+\end{equation*}
+và thoả các điều kiện:
+\begin{equation*}
+	\int_{0}^{t}\left[|\alpha(x,\omega)|-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}\gamma^2(s,z,\omega)v(dz) \right]ds<\infty \condition{h.c}
+\end{equation*}
+\begin{equation*}
+	\int_{0}^{t}\left[|A(s,\omega)|-\dfrac{1}{2}B^2(s,\omega)+\int_{R_0}G^2(s,z,\omega)v(dz) \right]ds<\infty \condition{h.c}
+\end{equation*}
+Khi đó phương trình trên sẽ có nghiệm là:
+\begin{dmath}\label{eq:4.4.2}
+X(t)=X_1(t^-)\left\{x_0+\int_0^t\dfrac{1}{X_1(s^-)}\left[A(s,\omega)-\beta(s,\omega)B(s,\omega)-\int_{R_0}\dfrac{\gamma(s,z,\omega)G(s,z,\omega)}{1+\gamma(s,z,\omega)}v(dz)\right]ds+\int_0^t\dfrac{B(s,\omega)}{X_1(s^-)}dW(s)+\int_0^t\int_{R_0}\dfrac{G(s,z,\omega)}{X_1(s^-)(1+\gamma(s,z,\omega))}\tilde{N}(ds,dz) \right\}	
+\end{dmath}
+trong đó
+\begin{dmath}\label{eq:4.4.3}
+X_1(t)=\exp\left\{\int_0^t\left[\alpha(s,\omega)-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}[\log(1+\gamma(s,z,\omega))-\gamma(s,z,\omega)]v(dz) \right]ds+\int_0^t\beta(s,\omega)dW(s)+\int_0^t\int_{R_0}\log(1+\gamma(s,t,\omega))\tilde{N}(ds,dz) \right\}	
+\end{dmath}
+Để chứng minh định lý \eqref{eq:4.4.1} trước hết ta chứng minh bổ đề sau.\\
+\textbf{Bổ đề 4.4.2}\\
+Cho phương trình vi phân ngẫu nhiên tuyến tính thuần nhất có dạng:
+\begin{equation}\label{eq:4.4.4}
+	dX_1(t)=X_1(t^-)\left[\alpha(t,\omega)dt+\beta(t,\omega)dW(t)+\int_{R_0}\gamma(t,z,\omega)\tilde{N}(dt,dz) \right]
+\end{equation}
+với điều kiện ban đầu $X(0)=1$, trong đó: $\alpha(t,\omega);\beta(t,\omega);\gamma(t,z,\omega);t\geq 0;z\in R_0;\omega\in\Omega$ là những quá trình ngẫu nhiên khả đoán cho trước với
+\begin{equation*}
+	\gamma(t,z,\omega)>-1\condition{h.c $\forall(t,z,\omega)\in[0,\infty)\times R_0\times\Omega$}
+\end{equation*}
+và thoả điều kiện:
+\begin{equation*}
+	\int_0^t\left[|\alpha(s,\omega)|-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}\gamma^2(s,z,\omega)v(dz) \right]ds<\infty\condition{h.c}
+\end{equation*}
+khi đó nghiệm của phương trình \eqref{eq:4.4.4} sẽ cho bởi hệ thức \eqref{eq:4.4.3}.\\
+\textbf{Chứng minh bổ đề 4.4.2}\\
+Ta xét hàm: $X_1(t)=F(t,H(t));t\geq 0$ với $F(t,x)=e^x$ và $H(t)$ xác định bởi:
+\begin{dmath*}
+H(t)=\int_0^t\left[\alpha(s,\omega)-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}\left[\log(1+\gamma(s,z,\omega))-\gamma(s,z,\omega)\right]v(dz) \right]	ds+\int_0^t\beta(s,\omega)dW(s)+\int_0^t\int_{R_0}\log(1+\gamma(s,z,\omega))\tilde{N}(ds,dz)
+\end{dmath*}
+Áp dụng công thức Itô cho $X_1(t)=F(t,H(t))$ ta sẽ thu được:
+\begin{dmath*}
+	dX_1(t)=e^{H(t)}\left[\left(\alpha(t,\omega)-\dfrac{1}{2}\beta^2(t,\omega)+\int_{R_0}\left[\log(1+\gamma(t,z,\omega))-\gamma(t,z,\omega)\right]v(dz) \right)dt \right]+e^{H(t)}\left[\dfrac{1}{2}\beta^2(t,\omega)dt+\beta(t,\omega)dW(t) \right]+\int_{R_0}e^{H(t)}\left[\gamma(t,z,\omega)-\log(1+\gamma(t,z,\omega)) \right]v(dz)+\int_{R_0}e^{H(t)}\gamma(t,z,\omega)\tilde{N}(dt,dz)=X_1(t^-)\left[\alpha(t,\omega)dt+\beta(t,\omega)dW(t)+\int_{R_0}\gamma(t,z,\omega)\tilde{N}(dt,dz) \right].\blacksquare
+\end{dmath*}
 
 %Nội dung trọng tâm
 \textbf{Phương trình vi phân ngẫu nhiên}\\
