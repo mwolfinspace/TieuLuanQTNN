@@ -1,5 +1,5 @@
 %Phần thiết đặt trang
-\documentclass[12pt,a4paper]{article}
+\documentclass[14pt,a4paper]{article}
 \usepackage{mathastext}
 \usepackage[utf8]{vietnam}
 \usepackage{amsfonts}
@@ -124,6 +124,8 @@
 \theorembodyfont{\normalfont}
 \theoremseparator{:}
 \renewtheorem{example}{Ví dụ}
+%Đánh số công thức theo chương
+\numberwithin{equation}{section}
 
 %Tự ngắt dòng cho biểu thức toán dài dòng
 \usepackage{mathpazo}
@@ -135,272 +137,82 @@
 %Chỉnh loại tiêu đề chương thành I, II
 \renewcommand\thesection{\Roman{section}}
 \renewcommand\thesubsection{\arabic{subsection}}
-\renewcommand\thesubsubsection{\alph{subsubsection}}
+\renewcommand\thesubsubsection{\thesubsection.\arabic{subsubsection}}
 
 
 %Chương 1:
-\textbf{Nội dung trong tập}\\
-\textbf{* Giải tích cũ:} Nhận dạng $F(x,y,y',y'',...,y^{(n)})$ rồi giải phương trình \begin{equation}
-	\begin{aligned}
-		F(x,dx,d^2x,...,d^{(n)}x)=0
-	\end{aligned}
+\section{Các kiến thức chuẩn bị}
+\subsection{Mở đầu và ví dụ về phương trình vi ngẫu nhiên}
+\subsubsection{Mở đầu}
+Trước tiên, ta tìm các quá trình $X=(X_t,t\geq 0)$ có thể thoả mãn phương trình
+\begin{equation}\label{eq:1.1}
+	\dfrac{dX_t}{dt}=b(t,X_t)+\sigma(t,X_t)W_t
 \end{equation}
-Trong đó nếu gặp dạng đặc biệt ta giải phương trình vi phân tuyến tính theo dạng thuần nhất rồi đến dạng không thuần nhất.\\
-Xét: $a_ny^{(n)}_x+a_{n-1}y^{(n-1)}_x+...+a_1y'(x)+a_0y(x)=f(x)$ nếu $f(x)=0$ thì phương trình tuyến tính thuần nhất, ngược lại nếu $f(x)\neq0$ thì phương trình tuyến tính không thuần nhất.\\
-* Phương pháp giải: Giải phương trình thuần nhất (tương ứng) theo phương pháp biến thiên hằng số tức là:
-\begin{gather*}
-	ay''+by'+cy=f\Rightarrow ay''+by'+cy=0
-\end{gather*}
-Khi đó phương trình đặc trưng $ak^2+bk+c=0$ có nghiệm tổng quát là:\\
-$\begin{cases} y(x)=c_1e^{k_1x}+c_2e^{k_2x} & (k_1\neq k_2 \in \mathbb{R}) \\ y(x)=(c_1x+c_2)e^{kx} & (k_1=k_2=k\in \mathbb{R}) \\ y(x)=e^{\alpha x}(c_1\cos{\beta x}+c_2\sin{\beta x}) & (k_{1,2}=\alpha \pm \beta i) \end{cases}$\\
-\textbf{* Giải tích ngẫu nhiên}: Giải phương trình $dX_t=\alpha(\omega,t)dt+\beta(\omega,t)dW_t$ hay dạng tổng quát $dX_t=\alpha(\omega,t)dt+\beta(\omega,t)d\aleph_t$ với $\aleph_t$ là quá trình có vi phân ngẫu nhiên.\\
-* Phương pháp giải: Khi giải phương trình vi phân tuyến tính thuần nhất trước, sau đó ta dùng phương pháp biến đổi hằng số để trừ ra nghiệm tổng quát của phương trình vi phân tuyến tính không thuần nhất.\\
-* Nhận dạng phương trình vi phân tuyến tính:\\
-$dX_t=\alpha X_tdt+\beta X_tdW_t \rightarrow$ phương trình vi phân tuyến tính thuần nhất.\\
-$dX_t=(\alpha X_t+F)dt+(\beta X_t+G)dW_t$ nếu $F\equiv G \equiv 0$ thì không thuần nhất.\\
-* Phương pháp chung: Dùng công thức Itô $\rightarrow$ Giải phương trình thuần nhất $\Rightarrow$ Dùng phương pháp tách biến để giải phương trình không thuần nhất.\\
-\textbf{* Phương trình Black-Scholes}: $dX=\alpha dt+\beta dW$\\
-B1: Giải thuần nhất thiếu (khử $\alpha$) suy ra $X_1$.\\
-B2: Dùng phương pháp tách nghiệm $X=X_1.X_2$ để tìm $X_2$.\\
-B3: Trong $X_2$ có A, B chưa biết, tìm A, B.
-B4: Có $X_2$ kết hợp với $X_1$ để có $X\Rightarrow$ Giải xong phương trình thuần nhất đủ.\\
-B5: Giải phương trình không thuần nhất từ kết quả trước đó.\\
-B6: Dùng phương pháp tách biến để thực hiện B5.\\
-B7: Sau khi tách biến, kết quả giống với B1, lại tìm A, B chưa biết khác.\\
-B8: Có $\xi_2$ lại kết hợp $\xi_1$ để ra $\xi$ là nghiệm cần tìm.
+trong đó $b(t,x)\in\mathbb{R},\sigma(t,x)\in\mathbb{R}$ và $W_t$ là quá trình Wiener 1-chiều. Khi đó $X_t$ cũng là lời giải của phương trình tích phân
+\begin{equation}\label{eq:1.2}
+	X_t=X_0+\int_0^tb(s,X_s)ds+\int_0^t\sigma(s,X_s)dB_s
+\end{equation}
+hay viết dưới dạng vi phân là
+\begin{equation}\label{eq:1.3}
+	dX_t=b(t,X_t)dt+\sigma(t,X_t)dB_t
+\end{equation}
+Như vậy từ \eqref{eq:1.1} sang \eqref{eq:1.3} ta đã thay thế một cách hình thức $W_t$ bởi $\dfrac{dB_t}{dt}$. Vấn đề đặt ra lúc này với một phương trình vi phân \eqref{eq:1.3} thì:
+\begin{enumerate}[(1)]
+	\item Với những điều kiện nào của các hệ số b và $\sigma$ thì tồn tại nghiệm và nghiệm đó là duy nhất?
+	\item Ta sẽ giải phương trình đó như thế nào?
+\end{enumerate}
+Ta hãy xét câu hỏi 2 qua một số ví dụ khác, sau đó ở phần sau sẽ giải quyết vấn đề trong câu hỏi 1.
+\subsubsection{Một số ví dụ về phương trình vi phân ngẫu nhiên}
+\textbf{a. Mô hình tăng dân số đơn giản}
+\begin{equation}\label{eq:1.1.a}
+	\dfrac{dN_t}{dt}=\alpha_t.N_t \condition{$N(0)=N_0$}
+\end{equation}
+trong đó $N_t$ là số dân tại thời điểm $t,\alpha_t$ là tốc độ tăng dân số tại thời điểm t. Thông thường $\alpha_t$ không được xác định rõ ràng nhưng do chịu tác động của môi trường tự nhiên nên người ta thường viết dưới dạng $\alpha W_t$, với $W_t$ là một quá trình Wiener còn $\alpha$ là hằng số. Ngoài ra, khi kết hợp với tỉ lệ sinh và tử cho ta thêm một hằng số khác là $r_t$. Do đó ta được $\alpha_t=r_t+\alpha W_t$ và thay vào phương trình \eqref{eq:1.1.a} sẽ được:
+\begin{equation*}
+	dN_t=rN_tdt+\alpha N_tdB_t
+\end{equation*}
+trong đó cụm $b(t,x)=rx$, còn $\sigma(t,x)=\alpha x$ hay
+\begin{equation*}
+	\dfrac{dN_t}{N_t}=rdt+\alpha dB_t\Leftrightarrow\int_0^t\dfrac{dN_t}{N_t}=rt+\alpha B_t \condition{$B_0=0$}\tag{*}
+\end{equation*}
+Để tính tích phân vế trái, ta áp dụng công thức Itô cho hàm $g(t,x)=\ln(x),x>0$ và ta có:
+\begin{dmath*}
+	d(\ln N_t)=\dfrac{1}{N_t}dN_t+\dfrac{1}{2}(-\dfrac{1}{N_t^2})(dN_t)^2=\dfrac{dN_t}{N_t}-\dfrac{1}{2N_t^2}\alpha^2N_t^2dt=\dfrac{dN_t}{N_t}-\dfrac{1}{2}\alpha^2.dt
+\end{dmath*}
+Do đó
+\begin{equation*}
+	\dfrac{dN_t}{N_t}=d(\ln N_t)+\dfrac{1}{2}\alpha^2dt
+\end{equation*}
+Kết hợp với hệ thức (*) ta suy ra:
+\begin{equation*}
+	\ln\dfrac{N_t}{N_0}=(r-\dfrac{1}{2}\alpha^2)\alpha t+\alpha B_t
+\end{equation*}
+Hay:
+\begin{equation*}
+	N_t=N_0.exp[(r-\dfrac{\alpha^2}{2})t+\alpha B_t]
+\end{equation*}
+Đó là lời giải của mô hình dân số đã cho.
+\textbf{b. Chuyển động Brown trên đường tròn đơn vị}\\
+Ta chọn $X=B$, một chuyển động Brown 1 chiều và $g(t,x)=e^{ix}=(\cos{x},\sin{x})\in\mathbb{R}^2$ với $x\in\mathbb{R}$. Khi đó
+\begin{equation*}
+	Y\equiv g(t,X)=e^{iB}=(\cos{B},\sin{B})
+\end{equation*} 
+Vậy
+\begin{equation*}
+	Y=(Y_1,Y_2) \condition{với $Y_1=\cos{B},Y_2=\sin{B}$}
+\end{equation*}
+Theo công thức Itô:
 
-\textbf{Quyển "Lớp quá trình ngẫu nhiên Itô - Levy và ứng dụng"}\\
-\textbf{1. Phương trình vi phân tuyến tính Itô - Levy}\\
-a. Định nghĩa Phương trình vi phân tuyến tính Itô - Levy\\
-\textbf{Định nghĩa:} Phương trình vi phân tuyến tính Itô - Levy là phương trình có dạng:
-\begin{dmath}\label{eq:dn1}
-	dX(t)=[\alpha(t,\omega)X(t^-)+A(t,\omega)]dt+[\beta(t,\omega)X(t^-)+B(t,\omega)]dW(t)\\
-	+\int_{(R_0)^{n_2}}[\gamma(t,z,\omega)X(t^-)+G(t,z,\omega)]\overline{N}(dt,dz)
-\end{dmath}
-Trong đó điều kiện ban đầu $X(0)=x_0$, với:
-\begin{center}
-$\alpha(t,\omega); \beta(t,\omega);A(t,\omega);B(t,\omega);\gamma(t,z,\omega);G(t,z,\omega);$\\
-$\forall t \geqslant 0; z \in R_0; \omega \in \Omega$
-\end{center}
-là những quá trình ngẫu nhiên khả đoán cho trước với:
-\begin{center}
-	$\gamma(t,z,\omega)>-1;\forall (t,z,\omega)\in [0,\inf\}\times R_0 \times \Omega$
-\end{center}
-và thoả các điều kiện:
-\begin{center}
-	$\int\limits_{0}^t[|\alpha(s,\omega)|-\dfrac{1}{2}\beta^2(s,\omega)+\int\limits_{R_0} \gamma^2(s,z,\omega)v(dz)]ds<\infty$; h.c\\
-	$\int\limits_{0}^t [|A(s,\omega)-\dfrac{1}{2}B^2(s,\omega)+\int\limits_{R_0}G^2(s,z,\omega)v(dz)]ds<\infty$; h.c
-\end{center}
-khi $A(t,\omega)\equiv B(t,\omega)\equiv G(t,z,\omega)\equiv 0$, h.c; ta gọi đó là quá trình vi phân ngẫu nhiên tuyến tính thuần nhất hay còn gọi là phương trình vi phân ngẫu nhiên hình học.\\
-b. Định lý Giải phương trình vi phân ngẫu nhiên\\
-Cho phương trình vi phân ngẫu nhiên tuyến tính Itô - Levy nêu trong định nghĩa trên, khi đó phương trình \eqref{eq:dn1} sẽ có nghiệm là:
-\begin{dmath}\label{eq:dl1}
-	\dfrac{X(t)}{X_1(t^-)}=\left\{x_0+\int_{R_0}\dfrac{1}{X_1(s^-)}[A(s,\omega)-\beta(s,\omega)B(s,\omega)-\int_{R_0} \dfrac{\gamma(s,z,\omega)G(s,z,\omega)}{1+\gamma(s,z,\omega)}v(dz)]ds+\int_{0}^{t} \dfrac{B(s,\omega)}{X_1(s)}+\int_{0}^{t} \int_{R_0} \dfrac{G(s,z,\omega)}{X_1(s^-)(1+\gamma(s,z,\omega))} \overline{N}(ds,dz) \right\}
-\end{dmath}
-Trong đó:
-\begin{dmath}\label{eq:pt1}
-	X_1(t)=exp\left\{\int_{0}^{t}\left[\alpha(s,\omega)-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}\log(1+\gamma(s,z,\omega))-\gamma(s,z,\omega)v(dz) \right]ds+\int_{0}^{1}\beta(s,\omega)dW(s)+\int_{0}^{1}\int_{R_0}\log(1+\gamma(s,t,\omega))\overline{N}(ds,dz) \right\}
-\end{dmath}
-Để chứng minh định lý trên trước hết ta cần chứng minh bổ đề sau:\\
-c. Bổ đề\\
-Cho phương trình vi phân ngẫu nhiên tuyến tính thuần nhất, nghĩa là phương trình có dạng:
-\begin{dmath}\label{eq:pt2}
-	\dfrac{dX_1(t)}{X_1(t^-)}=\left[\alpha(t,\omega)dt+\beta(t,\omega)dW(t)+\int_{R_0}\gamma(t,z,\omega)\overline{N}(dt,dz) \right]	
-\end{dmath}
-Với điều kiện ban đầu $X(0)=1$, trong đó:
-\begin{equation*}
-\alpha(t,\omega);\beta(t,\omega);\gamma(t,z,\omega);t\geq0;z\in R_0;\omega\in \Omega	
-\end{equation*}
-là những quá trình ngẫu nhiên khả đoán cho trước với
-\begin{equation*}
-	\gamma(t,z,\omega)>-1;\forall (t,z,\omega)\in [0;\infty\}\times R_0 \times \Omega
-\end{equation*}
-và thoả điều kiện:
-\begin{equation*}
-	\int\limits_{0}^{t}\left[|\alpha(s,\omega)|-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}\gamma^2(s,z,\omega)v(dz) \right]ds<\infty \condition{h.c}
-\end{equation*}
-khi đó nghiệm của phương trình \eqref{eq:pt2} sẽ được cho bởi hệ thức \eqref{eq:pt1}.\\
-\textbf{Chứng minh bổ đề}:\\
-Ta xét hàm $X_1(t)=F(t,H(t));t\geq 0$ với $F(t,x)=e^x$ và $H(T)$ xác định bởi:
-\begin{dmath*}
-H(t)=\int\limits_{0}^{t}\left[\alpha(s,\omega)-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}\log(1+\gamma(s,z,\omega))-\gamma(s,z,\omega)v(dz) \right]ds+\int_{0}^{1}\beta(s,\omega)dW(s)+\int_{0}^{1}\int_{R_0}\log(1+\gamma(s,z,\omega))\overline{N}(ds,dz)	
-\end{dmath*}
-Áp dụng công thức Itô cho $X_1(t)=F(t,H(t))$, ta sẽ thu được:
-\begin{dmath*}
-dX_1(t)=e^{H(t)}\left[\left(\alpha(t,\omega)-\dfrac{1}{2}\beta^2(t,\omega)+\int_{R_0}[\log(1+\gamma(t,z,\omega))-\gamma(t,z,\omega)]v(dz) \right)dt\right]+e^{H(t)}\left[\dfrac{1}{2}\beta^2(t,\omega)dt+\beta(t,\omega)dW(t) \right]	+\int_{R_0}e^{H(t)}[\gamma((t,z,\omega)-\log(1+\gamma(t,z,\omega)))]v(dz)dt+\int_{R_0}e^{H(t^-)}\gamma(t,z,\omega)\tilde{N}(dt,dz)=X_1(t^-)\left[\alpha(t,\omega)dt+\beta(t,\omega)dW(t)+\int_{R_0}\gamma(t,z,\omega)\tilde{N}(dt,dz) \right]\blacksquare
-\end{dmath*}
-\textbf{Chứng minh định lý}\\
-Ta tìm nghiệm phương trình \eqref{eq:dn1} bằng phương pháp tách nghiệm, nghĩa là tìm nghiệm của nó dưới dạng tích
-\begin{equation}\label{eq:pt3}
-	X(t)=X_1(t^-).X_2(t^-)
-\end{equation}
-trong đó:
-\begin{itemize}
-	\item $X_1(t)$ là nghiệm của phương trình tuyến tính thuần nhất tương ứng, nghĩa là nó là nghiệm của phương trình \eqref{eq:pt2} nói trong Bổ đề.
-	\item $X_2(t)$ là nghiệm của phương trình:
-\begin{equation*}
-	dX_2(t)=A^*(t,\omega)dt+B^*(t,\omega)dW(t)+\int_{R_0}G^*(t,z,\omega)\tilde{N}(dt,dz)
-\end{equation*}
-\end{itemize}
-Với điều kiện $X_2(0)=x_0$, trong đó $A^*(t,\omega);B^*(t,\omega);G^*(t,z,\omega)$ là những hàm ta sẽ xác định sau.\\
-Theo bổ đề, ta có nghiệm $X_1(t^-)$ của phương trình \eqref{eq:pt2} cho bởi hệ thức \eqref{eq:pt1}. Áp dụng hệ quả cho tích $X(t)=X_1(t^-).X_2(t^-)$ nêu trên, ta thu được:
-\begin{dmath}
-d(X(t))=d(X_1(t^-).X_2(t^-))=X_1(t^-).dX_2(t)+X_2(t^-)dX_1(t)+\beta(t,\omega)X_1(t^-)B^*(t,\omega)dt+\int_{R_0}\gamma(t,z,\omega)X_1(t^-)G^*(t,z,\omega)\tilde{N}(dt,dz)=\alpha(t,\omega)X_1(t^-)X_2(t^-)+\beta(t,\omega)X_1(t^-)X_2(t^-)+\int_{R_0}\gamma(t,z,\omega)X_1(t^-)X_2(t^-)\tilde{N}(dt,dz)+X_1(t^-)A^*(t,\omega)dt+X_1(t^-)B^*(t,\omega)dW(t)+X_1(t^-)\int_{R}G^*(t,z,\omega)\tilde{N}(dt,dz)+\beta(t,\omega)X_1(t^-)B^*(t,\omega)dt+\gamma(t,z,\omega)X_1(t^-)G*(t,z,\omega)\tilde{N}(dt,dz)	
-\end{dmath}
-Mặt khác, $X(t)$ là nghiệm của phương trình \eqref{eq:dn1}, từ đó so sánh giữa \eqref{eq:dn1} và \eqref{eq:pt3}, ta thu được hệ phương trình:
-\begin{dmath*}
-\begin{cases}
-	A(t,\omega)=X_1(t^-)\left[A^*(t,\omega)+B(t,\omega)B^*(t,\omega)+\int\limits_{R_0}\gamma(t,z,\omega)G(t,z,\omega)v(dz) \right] \\
-	B(t,\omega)=X_1(t^-)B^*(t,\omega) \\
-	\int\limits_{R_0}G(t,z,\omega)\tilde{N}(dt,dz)=X_1(t^-)\int\limits_{R_0}(1+\gamma(t,z,\omega))G^*(t,z,\omega)\tilde{N}(dt,dz)
-\end{cases}	
-\end{dmath*}
-Suy ra:
-\begin{dmath*}
-\begin{cases}
-	A^*(t,\omega)=\dfrac{1}{X_1(t^-)} \left[A(t,\omega)-B(t,\omega)\beta(t,\omega)-\int_{R_0} \dfrac{\gamma(t,z,\omega)G(t,z,\omega)}{1+\gamma(t,z,\omega)} v(dz) \right] \\
-	B^*(t,\omega)=\dfrac{B(t,\omega)}{X_1(t^-)} \\
-	G^*(t,z,\omega)=\dfrac{G(t,z,\omega)}{X_1(t^-)(1+\gamma(t,z,\omega)}
-\end{cases}	
-\end{dmath*}
-Đặt $X_1(t)$ cho bởi hệ thức \eqref{eq:pt1}, và các biểu thức của $A^*(t,\omega);B^*(t,\omega);G^*(t,z,\omega)$ đã xác định được vào biểu thức \eqref{eq:pt3}, ta sẽ có nghiệm \eqref{eq:dn1}. $\blacksquare$\\
-\textbf{2. Một số phương trình đặc biệt}\\
-a. Phương trình Langevin\\
-\textbf{Phương trình Langevin} là phương trình có dạng:
-\begin{equation*}
-	dX(t)=-bX(t)dt+\sigma dW_t \condition{$X(0)=0$}
-\end{equation*}
-trong đó $b, \sigma$ là những hằng số thực.\\
-Phương trình Langevin là một phương trình vi phân ngẫu nhiên tuyến tính, do đó, theo kết quả phần trước ta thu được nghiệm của nó là quá trình ngẫu nhiên:
-\begin{equation*}
-	X(t)=e^{-bt}\left[X(0)+\int\limits_{0}^{t}\sigma e^{bs}dW_s \right] \condition{$t\geq 0$}
-\end{equation*}
-Quá trình xác định bởi hệ thức trên được gọi là quá trình Ornstein-Uhlenbeck.\\
-\textbf{Phương trình Langevin mở rộng} là phương trình có dạng:
-\begin{equation*}
-	dX(t)=\alpha(t)X(t)dt+\sigma (t)dW_t \condition{$X(0)=X_0$}
-\end{equation*}
-trong đó $\alpha(t)$ và $\sigma(t)$ là những quá trình ngẫu nhiên liên tục.\\
-Từ lời giải của phương trình vi phân tuyến tính tổng quát, ta sẽ có nghiệm của phương trình Langevin mở rộng là:
-\begin{equation*}
-	X(t)=\exp\left(\int\limits_{0}^{t}\alpha(s)ds \right)\left[X_0+\int\limits_{0}^{t}\exp\left(-\int\limits_{0}^{r}\alpha(s)ds \right)\sigma(r)dW_r \right]
-\end{equation*}
-b. Phương trình vi phân tuyến tính với chuyển động Brown nhiều chiều\\
-Phương trình vi phân tuyến tính với chuyển động Brown nhiều chiều là phương trình có dạng:
-\begin{equation*}
-	dX(t)=[\alpha(t)X(t)+f(t)]dt+\sum_{i=1}^{m}[\beta_i(t)X(t)+g_i(t)dW_t^{(i)} \condition{$X(0)=X_0$}
-\end{equation*}
-Khi đó nghiệm của nó sẽ là:
-\begin{equation*}
-	\dfrac{X(t)}{V(t)}=X_0+\int_{0}^{t}\dfrac{1}{V(s)}\left(\alpha(s)-\sum_{i=1}^{m}[\beta_i(s)]g_i(s) \right)ds+\int_{0}^{t}\sum_{i=1}^{m}\dfrac{1}{V(s)}g_i(s)dW_{s}^{i}
-\end{equation*}
-trong đó: $V(t)=\exp\{\int_{0}^{t}[\alpha(s)-\sum_{i=1}^{m}\dfrac{1}{2}\beta_i^2(t)]ds+\int_{0}^{t}\sum_{i=1}^{m}\beta_i(s)dW_s^i \}$.\\
-c. Phương trình Black - Scholes\\
-Trong toán tài chính, người ta hay nhắc đến phương trình mô tả sự biến động giá $S(t)$ một loại cổ phiếu nào đó theo thời gian:
-\begin{equation*}
-	dS(t)=\alpha S(t)dt+\beta S(t)dW_t \condition{$S(0)=S_0$}
-\end{equation*}
-trong đó $\alpha,\beta$ là những hằng số. Đây là phương trình vi phân hình học mà ta đã nói ở phần trên, và nghiệm của nó sẽ là:
-\begin{equation*}
-	S=(t)=S_0\exp\left[\left(\alpha-\dfrac{\beta^2}{2} \right)t+\beta W_t \right]
-\end{equation*}
-Chú ý: Khi giải bài toán về định giá quyền chọn mua theo kiểu Châu Âu sẽ dẫn đến một loại phương trình đạo hàm riêng cấp hai khác với phương trình trên nhưng người ta cũng gọi là phương trình Black-Scholesm, đó là phương trình:
-\begin{equation*}
-	\dfrac{\partial G}{\partial S}+\dfrac{1}{2}\sigma^2S^2\dfrac{\partial^2G}{\partial S^2}+rS\dfrac{\partial G}{\partial S}-rG=0
-\end{equation*}
-Trong đó: $G=G(S,t)$ là giá quyền chọn tại thời điểm t; giá chứng khoán $S=S(t)$; và lãi suất không rủi ro r.\\
-\textbf{3. Ứng dụng trong tài chính}\\
-a. Bài toán về chọn danh mục đầu tư rủi ro\\
-Trước hết, ta mô hình hoá bài toán về tài sản và phương án đầu tư trên thị trường bằng các công cụ của giải tích ngẫu nhiên. Khi xét đến biến động của dòng tài sản trên thị trường, người ta thường xét đến hai loại tài sản: phi rủi ro (như trái phiếu...) và tài sản rủi ro (như cổ phiếu, bất động sản...)\\
-Loại tài sản phi rủi ro với biến động giá $X_0(t)$ được xét qua phương trình vi phân:
-\begin{equation*}
-	dX_0(t)=\lambda(t,\omega)X_0(t)dt \condition{$X_0(0)=1,t\in[0,T]$}
-\end{equation*}
-Loại tài sản rủi ro với biến động giá $X_1(t)$ thường được xét qua phương trình vi phân ngẫu nhiên Itô có dạng:
-\begin{equation}\label{eq:ud1}
-	dX_1(t)=\alpha(t,\omega)X_1(t)dt+\beta(t,\omega)X_1(t)dB_t(\omega) \condition{$X_1(0)>0,t\in[0,T]$}
-\end{equation}
-trong đó: $\lambda(t,\omega)=\lambda(t);\alpha(t,\omega)=\alpha(t);\beta(t,\omega)=\beta(t)$ là những quá trình ngẫu nhiên thoả điều kiện:
-\begin{equation*}
-	E\int\limits_{0}^{T}[|\lambda(t)|+\alpha(t)+\beta^2(t)]dt<\infty;
-\end{equation*}
-Ta ký hiệu: $\tau_0(t)=\tau_0(t,\omega);\tau_1(t)=\tau_1(t)(t,\omega);t\in[0,T];\omega\in \Omega$ là những đơn vị vốn đầu tư cho loại tài sản phi rủi ro và rủi ro tương ứng. Khi đó ta gọi: $\tau(t):=(\tau_0(t),\tau_1(t))$ là một phương án đầu tư (một danh mục đầu tư) với tổng giá trị tài sản tại thời điểm t bằng:
-\begin{equation}\label{eq:ud2}
-	V^\tau(t)=\tau_0(t)X_0(t)+\tau_1(t)X_1(t)	
-\end{equation}
-Phương án đầu tư được gọi là tự tài trợ (seft-financing) nếu ta có:
-\begin{equation}\label{eq:ud3}
-	dVT\tau(t)=\tau_0(t)dX_0(t)+\tau_1(t)dX_1(t)
-\end{equation}
-Từ giả định: $\tau(t);t\in[0,T]$ là tự tài trợ, từ hệ thức \eqref{eq:ud2} ta sẽ có:
-\begin{equation*}
-	\tau_0(t)=\dfrac{V^\tau(t)-\tau_1(t)X_1(t)}{X_0(t)}
-\end{equation*}
-Từ các hệ thức trên suy ra:
-\begin{equation*}
-	dV^\tau(t)=\lambda(t)(V^\tau(t)-\tau_1(t)X_1(t))dt+\tau_1(t)dX_1(t)
-\end{equation*}
-Sử dụng \eqref{eq:ud1}, dựa vào phương trình trên ta sẽ thu được:
-\begin{equation}\label{eq:ud4}
-	dV^\tau(t)=[\lambda(t)V^\tau(t)+(\alpha(t)-\lambda(t))\tau_1(t)X_1(t)]dt +\beta(t)\tau_1(t)X_1(t)dB_t
-\end{equation}
-Đến đây ta thấy rằng phương trình \eqref{eq:ud4} là một phương trình vi phân ngẫu nhiên tuyến tính mà ta sẽ nói đến phương pháp giải ở mục phía sau.\\
-Mặc khác, trong thực tế thường xét đến việc tìm phương án đầu tư $\tau(t);t\in[0,T]$ để thu được tổng giá trị tài sản là: $V^\tau(T)=\text{\AA}$. Đại lượng ngẫu nhiên $\text{\AA}$ tương ứng với quyền tài chính (financial claim), phương án đầu tư như vậy được gọi là phương án đáp ứng (replicating portfolio).\\
-Mở rộng vấn đề nêu trên vào trường hợp nhiều chiều, tương ứng với việc có n khối tài sản rủi ro với biến động giá $X_i(t),i=1,2,...,n$, được cho bởi:
-\begin{equation}\label{eq:ud5}
-	dX_i(t)=X_i(t^-)\left[\beta_i(t)dB_t+\int_{R_0}\gamma_i(t,x)\overline{N}(dt,dx) \right] \condition{$i=1,2,...,n$}
-\end{equation}
-trong đó $B(t)=(B_1(t),...,B_n(t))^T;t\geq 0$ là quá trình Wiener n-chiều với:
-\begin{equation*}
-	\overline{N}(dt,dx)=\left(\overline{N}_1(dt,dx_1),...,\overline{N}_n(dt,dx_n)\right)^T \condition{$x\in R_0:=R\backslash\{0\}$}
-\end{equation*}
-là độ đo ngẫu nhiên Poisson bù (compensated Poisson random measure) và còn:
-\begin{equation*}
-	\beta_i(t)=(\beta_{i_1}(t),...,\beta_{i_n}(t));\gamma_i(t,x)=(\gamma_{i_1}(t,x),...,\gamma_{i_n}(t,x))
-\end{equation*}
-là các quá trình ngẫu nhiên thoả điều kiện:
-\begin{equation*}
-	\sum_{i,j=1}^{n}\int_{0}^{T}\left[\beta_{ij}^2(t)+\int_{R_0}\gamma_{ij}^2(t,x)v(dx) \right]dt<\infty \condition{h.c}
-\end{equation*}
-Quyền $\text{\AA}$ sẽ có thể đáp ứng nếu tồn tại quá trình ngẫu nhiên:
-\begin{equation*}
-	\varphi(t)=\left(\varphi_1(t),...\varphi_n(t) \right)^T \condition{$t\geq 0$ sao cho:}\\
-\end{equation*}
-\begin{equation*}
-	\sum_{i=1}^{n}\int_{0}^{T}\varphi_i^2(t)X_i(t^-)\left[\sum_{j=1}^{n}\beta_{ij}^2(t)+\int_{R_0}\gamma_{ij}^2(t,x)v(dx) \right]dt<\infty \condition{h.c}
-\end{equation*}
-cùng với việc thoả điều kiện $\text{\AA}=E\{\text{\AA}\}+\sum\limits_{i=1}^{n}\int\limits_{0}^{T}\varphi_i(t)dX_i(t)$. Trong trường hợp này, ta nói rằng $\varphi$ là phương án đáp ứng đối với quyền tài chính.\\
-b. Giải quyết bài toán đầu tư đáp ứng\\
-Để giải quyết bài toán theo hướng đầu tư đáp ứng đã nêu, thường nó dẫn đến phương trình \eqref{eq:ud4} và \eqref{eq:ud5} mà ta xét chứng dưới dạng phương trình vi phân ngẫu nhiên tổng quát sau:\\
-\textbf{Định lý:} Cho phương trình vi phân ngẫu nhiên tuyến tính có dạng:
-\begin{dmath*}
-dX(t)=[\alpha(t)X(t^-)+\mathscr{A}(t)]dt+[\beta(t)X(t^-)+\mathscr{B}(t)]dB_t\\ +\int_{R_0}[\gamma(t,x)+\mathscr{T}(t,x)]\overline{N}(dt,dx) \condition{$X(0)=x_0$}
-\end{dmath*}
-trong đó: $\alpha(T)=\alpha(t,\omega);\beta(t)=\beta(t,\omega);\gamma(t,x)=\gamma(t,x,\omega);\mathscr{A}(t)=\mathscr{A}(t,\omega);\mathscr{B}(t)=\mathscr{B}(t,\omega);\mathscr{T}(t,x)=\mathscr{T}(t,x,\omega)$ là những quá trình ngẫu nhiên thoả các điều kiện:
-\begin{equation*}
-\begin{split}
-	&\int_{0}^{T}\left[\alpha(t)+\beta^2(t)+\int_{R_0}\gamma^2(t,x)v(dx) \right]dt<\infty\\
-	&\int_{0}^{T}\left[\mathscr{A}(t)+\mathscr{B}^2(t)+\int_{R_0}\mathscr{T}^2(t,x)v(dx) \right]dt<\infty
-\end{split}
-\end{equation*}
-Khi đó, ta sẽ có nghiệm của phương trình cho bởi hệ thức:
-\begin{dmath*}
-\dfrac{X(t)}{X_1(t^-)}=x_0+\int\limits_{0}^{t}X_1^{-1}(s^-)\left[\mathscr{A}(s)-\beta(s)\mathscr{B}(t)-\int\limits_{R_0}\dfrac{\gamma(s,x)\mathscr{T}(s,x)}{1+\gamma(s,x)}v(dx) \right]ds+\int\limits_{0}^{t}\dfrac{\mathscr{B}(s)}{X_1^{-1}(s^-)}dB(s)+\int\limits_{0}^{t}\int\limits_{R_0}\dfrac{\mathscr{T}(t,x)}{X_1(s^-)(1+\gamma(s,x))}\overline{N}(dt,dx).	
-\end{dmath*}
-trong đó:
-\begin{dmath*}
-X_1(t^-)=\exp\left\{\int_{0}^{t}\left[\alpha(s)-\dfrac{1}{2}\beta^2(t)+\int_{R_0}[\log(1+\gamma(s,x))-\gamma(s,x)]v(dx) \right]+\int_{0}^{t}\beta(s)dB(s)+\int_{R_0}\int_{0}^{t}\log(1+\gamma(s,x))\overline{N}(ds,dx) \right\}
-\end{dmath*}
-Để chứng minh định lý này ta dùng phương pháp tách nghiệm đã xét ở phần trước. Ngoài ra, để giải quyết cụ thể hơn các vấn đề về bài toán đầu tư rõ ràng ta phải xét thêm đến những loại quyền chọn cụ thể trên thị trường (quyền chọn Châu Âu, quyền chọn Châu Á...). Việc xem xét và giải chúng trong một vài trường hợp đã cho ta những kết quả nhất định như các kết quả kinh điển của Black-Scholes, Floyd B. Hanson.\\
+\subsection{Khái niệm về phương trình vi phân ngẫu nhiên}
+\subsubsection{Điều kiện về sự tồn tại và duy nhất nghiệm}
+Ta xét phương trình vi phân ngẫu nhiên trong các điều kiện sau:
+\begin{enumerate}[(1)]
+	\item Không gian xác suất $(\Omega,\mathscr{F},P)$ với $\sigma$ - trường $\{\mathscr{F}_t,i\in [0,T]\}$
+	\item Quá trình Wiener $m$ - chiều $W(t)=\left\{W^{(1)}(t),W^{(2)},...,W^{(m)}(t) \right\}$ thích nghi với họ $\sigma$ - trường $\{\mathscr{F}_t,t\in [0,T] \}$ (điều đó có nghĩa là $W(0)=0;\forall t\in[0,T]$ đại lượng $W(t)\mathscr{F}_t$ - đo được và số gia $W(t+s)-W(t)$ khi $s\geq0$ không phụ thuộc vào $\sigma$ - trường $\mathscr{F}_t$).
+	\item $\xi_0$ là vectơ ngẫu nhiên $\mathscr{F}_0$ - đo được và vectơ $\xi_0$ không phụ thuộc vào quá trình $W(t)$.
+	\item Các hàm số $a(t,x)$ và $\delta(t,x)\left(t\in [0,T];x\in R^m \right)$ nhận các giá trị trong $R^m$ và $\mathscr{L}(R^m)$ tương ứng, với $\mathscr{L}(R^m)$ là tập các toán tự tuyến tính từ $R^m$.\\
+\end{enumerate}
 
-\textbf{Quyển "Quá trình ngẫu nhiên - Phần 1"}\\
-\textbf{1. Khái niệm về phương trình vi phân ngẫu nhiên}\\
-\textbf{Điều kiện 3.1.1:} Về sự tồn tại và duy nhất nghiệm\\
-Ta xét phương trình vi phân ngẫu nhiên trong các điều kiện sau:\\
-(1) Không gian xác suất $(\Omega,\mathscr{F},P)$ với $\sigma$ - trường $\{\mathscr{F}_t,i\in [0,T]\}$\\
-(2) Quá trình Wiener $m$ - chiều $W(t)=\left\{W^{(1)}(t),W^{(2)},...,W^{(m)}(t) \right\}$ thích nghi với họ $\sigma$ - trường $\{\mathscr{F}_t,t\in [0,T] \}$ (điều đó có nghĩa là $W(0)=0;\forall t\in[0,T]$ đại lượng $W(t)\mathscr{F}_t$ - đo được và số gia $W(t+s)-W(t)$ khi $s\geq0$ không phụ thuộc vào $\sigma$ - trường $\mathscr{F}_t$).\\
-(3) $\xi_0$ là vectơ ngẫu nhiên $\mathscr{F}_0$ - đo được và vectơ $\xi_0$ không phụ thuộc vào quá trình $W(t)$.\\
-(4) Các hàm số $a(t,x)$ và $\delta(t,x)\left(t\in [0,T];x\in R^m \right)$ nhận các giá trị trong $R^m$ và $\mathscr{L}(R^m)$ tương ứng, với $\mathscr{L}(R^m)$ là tập các toán tự tuyến tính từ $R^m$.\\
 \textbf{Dạng của phương trình vi phân ngẫu nhiên:}\\
 \begin{equation}\label{eq:c3e1}
 	d\xi(t)=a(t,\xi(t))dt+\delta(t,\xi(t))dW(t)
@@ -726,6 +538,262 @@ trong đó:
 \begin{equation*}
 	G(t):=\exp\left(\int_{0}^{t}\left[\alpha(s)-\sum_{i=1}^{m}\dfrac{(\beta^i)^2}{2} \right]ds+\int_{0}^{t}\sum_{i=1}^{m}\beta^i(s)dW_s^i \right)
 \end{equation*}
+
+\textbf{Nội dung trong tập}\\
+\textbf{* Giải tích cũ:} Nhận dạng $F(x,y,y',y'',...,y^{(n)})$ rồi giải phương trình \begin{equation}
+	\begin{aligned}
+		F(x,dx,d^2x,...,d^{(n)}x)=0
+	\end{aligned}
+\end{equation}
+Trong đó nếu gặp dạng đặc biệt ta giải phương trình vi phân tuyến tính theo dạng thuần nhất rồi đến dạng không thuần nhất.\\
+Xét: $a_ny^{(n)}_x+a_{n-1}y^{(n-1)}_x+...+a_1y'(x)+a_0y(x)=f(x)$ nếu $f(x)=0$ thì phương trình tuyến tính thuần nhất, ngược lại nếu $f(x)\neq0$ thì phương trình tuyến tính không thuần nhất.\\
+* Phương pháp giải: Giải phương trình thuần nhất (tương ứng) theo phương pháp biến thiên hằng số tức là:
+\begin{gather*}
+	ay''+by'+cy=f\Rightarrow ay''+by'+cy=0
+\end{gather*}
+Khi đó phương trình đặc trưng $ak^2+bk+c=0$ có nghiệm tổng quát là:\\
+$\begin{cases} y(x)=c_1e^{k_1x}+c_2e^{k_2x} & (k_1\neq k_2 \in \mathbb{R}) \\ y(x)=(c_1x+c_2)e^{kx} & (k_1=k_2=k\in \mathbb{R}) \\ y(x)=e^{\alpha x}(c_1\cos{\beta x}+c_2\sin{\beta x}) & (k_{1,2}=\alpha \pm \beta i) \end{cases}$\\
+\textbf{* Giải tích ngẫu nhiên}: Giải phương trình $dX_t=\alpha(\omega,t)dt+\beta(\omega,t)dW_t$ hay dạng tổng quát $dX_t=\alpha(\omega,t)dt+\beta(\omega,t)d\aleph_t$ với $\aleph_t$ là quá trình có vi phân ngẫu nhiên.\\
+* Phương pháp giải: Khi giải phương trình vi phân tuyến tính thuần nhất trước, sau đó ta dùng phương pháp biến đổi hằng số để trừ ra nghiệm tổng quát của phương trình vi phân tuyến tính không thuần nhất.\\
+* Nhận dạng phương trình vi phân tuyến tính:\\
+$dX_t=\alpha X_tdt+\beta X_tdW_t \rightarrow$ phương trình vi phân tuyến tính thuần nhất.\\
+$dX_t=(\alpha X_t+F)dt+(\beta X_t+G)dW_t$ nếu $F\equiv G \equiv 0$ thì không thuần nhất.\\
+* Phương pháp chung: Dùng công thức Itô $\rightarrow$ Giải phương trình thuần nhất $\Rightarrow$ Dùng phương pháp tách biến để giải phương trình không thuần nhất.\\
+\textbf{* Phương trình Black-Scholes}: $dX=\alpha dt+\beta dW$\\
+B1: Giải thuần nhất thiếu (khử $\alpha$) suy ra $X_1$.\\
+B2: Dùng phương pháp tách nghiệm $X=X_1.X_2$ để tìm $X_2$.\\
+B3: Trong $X_2$ có A, B chưa biết, tìm A, B.
+B4: Có $X_2$ kết hợp với $X_1$ để có $X\Rightarrow$ Giải xong phương trình thuần nhất đủ.\\
+B5: Giải phương trình không thuần nhất từ kết quả trước đó.\\
+B6: Dùng phương pháp tách biến để thực hiện B5.\\
+B7: Sau khi tách biến, kết quả giống với B1, lại tìm A, B chưa biết khác.\\
+B8: Có $\xi_2$ lại kết hợp $\xi_1$ để ra $\xi$ là nghiệm cần tìm.
+
+\textbf{Quyển "Lớp quá trình ngẫu nhiên Itô - Levy và ứng dụng"}\\
+\textbf{1. Phương trình vi phân tuyến tính Itô - Levy}\\
+a. Định nghĩa Phương trình vi phân tuyến tính Itô - Levy\\
+\textbf{Định nghĩa:} Phương trình vi phân tuyến tính Itô - Levy là phương trình có dạng:
+\begin{dmath}\label{eq:dn1}
+	dX(t)=[\alpha(t,\omega)X(t^-)+A(t,\omega)]dt+[\beta(t,\omega)X(t^-)+B(t,\omega)]dW(t)\\
+	+\int_{(R_0)^{n_2}}[\gamma(t,z,\omega)X(t^-)+G(t,z,\omega)]\overline{N}(dt,dz)
+\end{dmath}
+Trong đó điều kiện ban đầu $X(0)=x_0$, với:
+\begin{center}
+$\alpha(t,\omega); \beta(t,\omega);A(t,\omega);B(t,\omega);\gamma(t,z,\omega);G(t,z,\omega);$\\
+$\forall t \geqslant 0; z \in R_0; \omega \in \Omega$
+\end{center}
+là những quá trình ngẫu nhiên khả đoán cho trước với:
+\begin{center}
+	$\gamma(t,z,\omega)>-1;\forall (t,z,\omega)\in [0,\inf\}\times R_0 \times \Omega$
+\end{center}
+và thoả các điều kiện:
+\begin{center}
+	$\int\limits_{0}^t[|\alpha(s,\omega)|-\dfrac{1}{2}\beta^2(s,\omega)+\int\limits_{R_0} \gamma^2(s,z,\omega)v(dz)]ds<\infty$; h.c\\
+	$\int\limits_{0}^t [|A(s,\omega)-\dfrac{1}{2}B^2(s,\omega)+\int\limits_{R_0}G^2(s,z,\omega)v(dz)]ds<\infty$; h.c
+\end{center}
+khi $A(t,\omega)\equiv B(t,\omega)\equiv G(t,z,\omega)\equiv 0$, h.c; ta gọi đó là quá trình vi phân ngẫu nhiên tuyến tính thuần nhất hay còn gọi là phương trình vi phân ngẫu nhiên hình học.\\
+b. Định lý Giải phương trình vi phân ngẫu nhiên\\
+Cho phương trình vi phân ngẫu nhiên tuyến tính Itô - Levy nêu trong định nghĩa trên, khi đó phương trình \eqref{eq:dn1} sẽ có nghiệm là:
+\begin{dmath}\label{eq:dl1}
+	\dfrac{X(t)}{X_1(t^-)}=\left\{x_0+\int_{R_0}\dfrac{1}{X_1(s^-)}[A(s,\omega)-\beta(s,\omega)B(s,\omega)-\int_{R_0} \dfrac{\gamma(s,z,\omega)G(s,z,\omega)}{1+\gamma(s,z,\omega)}v(dz)]ds+\int_{0}^{t} \dfrac{B(s,\omega)}{X_1(s)}+\int_{0}^{t} \int_{R_0} \dfrac{G(s,z,\omega)}{X_1(s^-)(1+\gamma(s,z,\omega))} \overline{N}(ds,dz) \right\}
+\end{dmath}
+Trong đó:
+\begin{dmath}\label{eq:pt1}
+	X_1(t)=exp\left\{\int_{0}^{t}\left[\alpha(s,\omega)-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}\log(1+\gamma(s,z,\omega))-\gamma(s,z,\omega)v(dz) \right]ds+\int_{0}^{1}\beta(s,\omega)dW(s)+\int_{0}^{1}\int_{R_0}\log(1+\gamma(s,t,\omega))\overline{N}(ds,dz) \right\}
+\end{dmath}
+Để chứng minh định lý trên trước hết ta cần chứng minh bổ đề sau:\\
+c. Bổ đề\\
+Cho phương trình vi phân ngẫu nhiên tuyến tính thuần nhất, nghĩa là phương trình có dạng:
+\begin{dmath}\label{eq:pt2}
+	\dfrac{dX_1(t)}{X_1(t^-)}=\left[\alpha(t,\omega)dt+\beta(t,\omega)dW(t)+\int_{R_0}\gamma(t,z,\omega)\overline{N}(dt,dz) \right]	
+\end{dmath}
+Với điều kiện ban đầu $X(0)=1$, trong đó:
+\begin{equation*}
+\alpha(t,\omega);\beta(t,\omega);\gamma(t,z,\omega);t\geq0;z\in R_0;\omega\in \Omega	
+\end{equation*}
+là những quá trình ngẫu nhiên khả đoán cho trước với
+\begin{equation*}
+	\gamma(t,z,\omega)>-1;\forall (t,z,\omega)\in [0;\infty\}\times R_0 \times \Omega
+\end{equation*}
+và thoả điều kiện:
+\begin{equation*}
+	\int\limits_{0}^{t}\left[|\alpha(s,\omega)|-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}\gamma^2(s,z,\omega)v(dz) \right]ds<\infty \condition{h.c}
+\end{equation*}
+khi đó nghiệm của phương trình \eqref{eq:pt2} sẽ được cho bởi hệ thức \eqref{eq:pt1}.\\
+\textbf{Chứng minh bổ đề}:\\
+Ta xét hàm $X_1(t)=F(t,H(t));t\geq 0$ với $F(t,x)=e^x$ và $H(T)$ xác định bởi:
+\begin{dmath*}
+H(t)=\int\limits_{0}^{t}\left[\alpha(s,\omega)-\dfrac{1}{2}\beta^2(s,\omega)+\int_{R_0}\log(1+\gamma(s,z,\omega))-\gamma(s,z,\omega)v(dz) \right]ds+\int_{0}^{1}\beta(s,\omega)dW(s)+\int_{0}^{1}\int_{R_0}\log(1+\gamma(s,z,\omega))\overline{N}(ds,dz)	
+\end{dmath*}
+Áp dụng công thức Itô cho $X_1(t)=F(t,H(t))$, ta sẽ thu được:
+\begin{dmath*}
+dX_1(t)=e^{H(t)}\left[\left(\alpha(t,\omega)-\dfrac{1}{2}\beta^2(t,\omega)+\int_{R_0}[\log(1+\gamma(t,z,\omega))-\gamma(t,z,\omega)]v(dz) \right)dt\right]+e^{H(t)}\left[\dfrac{1}{2}\beta^2(t,\omega)dt+\beta(t,\omega)dW(t) \right]	+\int_{R_0}e^{H(t)}[\gamma((t,z,\omega)-\log(1+\gamma(t,z,\omega)))]v(dz)dt+\int_{R_0}e^{H(t^-)}\gamma(t,z,\omega)\tilde{N}(dt,dz)=X_1(t^-)\left[\alpha(t,\omega)dt+\beta(t,\omega)dW(t)+\int_{R_0}\gamma(t,z,\omega)\tilde{N}(dt,dz) \right]\blacksquare
+\end{dmath*}
+\textbf{Chứng minh định lý}\\
+Ta tìm nghiệm phương trình \eqref{eq:dn1} bằng phương pháp tách nghiệm, nghĩa là tìm nghiệm của nó dưới dạng tích
+\begin{equation}\label{eq:pt3}
+	X(t)=X_1(t^-).X_2(t^-)
+\end{equation}
+trong đó:
+\begin{itemize}
+	\item $X_1(t)$ là nghiệm của phương trình tuyến tính thuần nhất tương ứng, nghĩa là nó là nghiệm của phương trình \eqref{eq:pt2} nói trong Bổ đề.
+	\item $X_2(t)$ là nghiệm của phương trình:
+\begin{equation*}
+	dX_2(t)=A^*(t,\omega)dt+B^*(t,\omega)dW(t)+\int_{R_0}G^*(t,z,\omega)\tilde{N}(dt,dz)
+\end{equation*}
+\end{itemize}
+Với điều kiện $X_2(0)=x_0$, trong đó $A^*(t,\omega);B^*(t,\omega);G^*(t,z,\omega)$ là những hàm ta sẽ xác định sau.\\
+Theo bổ đề, ta có nghiệm $X_1(t^-)$ của phương trình \eqref{eq:pt2} cho bởi hệ thức \eqref{eq:pt1}. Áp dụng hệ quả cho tích $X(t)=X_1(t^-).X_2(t^-)$ nêu trên, ta thu được:
+\begin{dmath}
+d(X(t))=d(X_1(t^-).X_2(t^-))=X_1(t^-).dX_2(t)+X_2(t^-)dX_1(t)+\beta(t,\omega)X_1(t^-)B^*(t,\omega)dt+\int_{R_0}\gamma(t,z,\omega)X_1(t^-)G^*(t,z,\omega)\tilde{N}(dt,dz)=\alpha(t,\omega)X_1(t^-)X_2(t^-)+\beta(t,\omega)X_1(t^-)X_2(t^-)+\int_{R_0}\gamma(t,z,\omega)X_1(t^-)X_2(t^-)\tilde{N}(dt,dz)+X_1(t^-)A^*(t,\omega)dt+X_1(t^-)B^*(t,\omega)dW(t)+X_1(t^-)\int_{R}G^*(t,z,\omega)\tilde{N}(dt,dz)+\beta(t,\omega)X_1(t^-)B^*(t,\omega)dt+\gamma(t,z,\omega)X_1(t^-)G*(t,z,\omega)\tilde{N}(dt,dz)	
+\end{dmath}
+Mặt khác, $X(t)$ là nghiệm của phương trình \eqref{eq:dn1}, từ đó so sánh giữa \eqref{eq:dn1} và \eqref{eq:pt3}, ta thu được hệ phương trình:
+\begin{dmath*}
+\begin{cases}
+	A(t,\omega)=X_1(t^-)\left[A^*(t,\omega)+B(t,\omega)B^*(t,\omega)+\int\limits_{R_0}\gamma(t,z,\omega)G(t,z,\omega)v(dz) \right] \\
+	B(t,\omega)=X_1(t^-)B^*(t,\omega) \\
+	\int\limits_{R_0}G(t,z,\omega)\tilde{N}(dt,dz)=X_1(t^-)\int\limits_{R_0}(1+\gamma(t,z,\omega))G^*(t,z,\omega)\tilde{N}(dt,dz)
+\end{cases}	
+\end{dmath*}
+Suy ra:
+\begin{dmath*}
+\begin{cases}
+	A^*(t,\omega)=\dfrac{1}{X_1(t^-)} \left[A(t,\omega)-B(t,\omega)\beta(t,\omega)-\int_{R_0} \dfrac{\gamma(t,z,\omega)G(t,z,\omega)}{1+\gamma(t,z,\omega)} v(dz) \right] \\
+	B^*(t,\omega)=\dfrac{B(t,\omega)}{X_1(t^-)} \\
+	G^*(t,z,\omega)=\dfrac{G(t,z,\omega)}{X_1(t^-)(1+\gamma(t,z,\omega)}
+\end{cases}	
+\end{dmath*}
+Đặt $X_1(t)$ cho bởi hệ thức \eqref{eq:pt1}, và các biểu thức của $A^*(t,\omega);B^*(t,\omega);G^*(t,z,\omega)$ đã xác định được vào biểu thức \eqref{eq:pt3}, ta sẽ có nghiệm \eqref{eq:dn1}. $\blacksquare$\\
+\textbf{2. Một số phương trình đặc biệt}\\
+a. Phương trình Langevin\\
+\textbf{Phương trình Langevin} là phương trình có dạng:
+\begin{equation*}
+	dX(t)=-bX(t)dt+\sigma dW_t \condition{$X(0)=0$}
+\end{equation*}
+trong đó $b, \sigma$ là những hằng số thực.\\
+Phương trình Langevin là một phương trình vi phân ngẫu nhiên tuyến tính, do đó, theo kết quả phần trước ta thu được nghiệm của nó là quá trình ngẫu nhiên:
+\begin{equation*}
+	X(t)=e^{-bt}\left[X(0)+\int\limits_{0}^{t}\sigma e^{bs}dW_s \right] \condition{$t\geq 0$}
+\end{equation*}
+Quá trình xác định bởi hệ thức trên được gọi là quá trình Ornstein-Uhlenbeck.\\
+\textbf{Phương trình Langevin mở rộng} là phương trình có dạng:
+\begin{equation*}
+	dX(t)=\alpha(t)X(t)dt+\sigma (t)dW_t \condition{$X(0)=X_0$}
+\end{equation*}
+trong đó $\alpha(t)$ và $\sigma(t)$ là những quá trình ngẫu nhiên liên tục.\\
+Từ lời giải của phương trình vi phân tuyến tính tổng quát, ta sẽ có nghiệm của phương trình Langevin mở rộng là:
+\begin{equation*}
+	X(t)=\exp\left(\int\limits_{0}^{t}\alpha(s)ds \right)\left[X_0+\int\limits_{0}^{t}\exp\left(-\int\limits_{0}^{r}\alpha(s)ds \right)\sigma(r)dW_r \right]
+\end{equation*}
+b. Phương trình vi phân tuyến tính với chuyển động Brown nhiều chiều\\
+Phương trình vi phân tuyến tính với chuyển động Brown nhiều chiều là phương trình có dạng:
+\begin{equation*}
+	dX(t)=[\alpha(t)X(t)+f(t)]dt+\sum_{i=1}^{m}[\beta_i(t)X(t)+g_i(t)dW_t^{(i)} \condition{$X(0)=X_0$}
+\end{equation*}
+Khi đó nghiệm của nó sẽ là:
+\begin{equation*}
+	\dfrac{X(t)}{V(t)}=X_0+\int_{0}^{t}\dfrac{1}{V(s)}\left(\alpha(s)-\sum_{i=1}^{m}[\beta_i(s)]g_i(s) \right)ds+\int_{0}^{t}\sum_{i=1}^{m}\dfrac{1}{V(s)}g_i(s)dW_{s}^{i}
+\end{equation*}
+trong đó: $V(t)=\exp\{\int_{0}^{t}[\alpha(s)-\sum_{i=1}^{m}\dfrac{1}{2}\beta_i^2(t)]ds+\int_{0}^{t}\sum_{i=1}^{m}\beta_i(s)dW_s^i \}$.\\
+c. Phương trình Black - Scholes\\
+Trong toán tài chính, người ta hay nhắc đến phương trình mô tả sự biến động giá $S(t)$ một loại cổ phiếu nào đó theo thời gian:
+\begin{equation*}
+	dS(t)=\alpha S(t)dt+\beta S(t)dW_t \condition{$S(0)=S_0$}
+\end{equation*}
+trong đó $\alpha,\beta$ là những hằng số. Đây là phương trình vi phân hình học mà ta đã nói ở phần trên, và nghiệm của nó sẽ là:
+\begin{equation*}
+	S=(t)=S_0\exp\left[\left(\alpha-\dfrac{\beta^2}{2} \right)t+\beta W_t \right]
+\end{equation*}
+Chú ý: Khi giải bài toán về định giá quyền chọn mua theo kiểu Châu Âu sẽ dẫn đến một loại phương trình đạo hàm riêng cấp hai khác với phương trình trên nhưng người ta cũng gọi là phương trình Black-Scholesm, đó là phương trình:
+\begin{equation*}
+	\dfrac{\partial G}{\partial S}+\dfrac{1}{2}\sigma^2S^2\dfrac{\partial^2G}{\partial S^2}+rS\dfrac{\partial G}{\partial S}-rG=0
+\end{equation*}
+Trong đó: $G=G(S,t)$ là giá quyền chọn tại thời điểm t; giá chứng khoán $S=S(t)$; và lãi suất không rủi ro r.\\
+\textbf{3. Ứng dụng trong tài chính}\\
+a. Bài toán về chọn danh mục đầu tư rủi ro\\
+Trước hết, ta mô hình hoá bài toán về tài sản và phương án đầu tư trên thị trường bằng các công cụ của giải tích ngẫu nhiên. Khi xét đến biến động của dòng tài sản trên thị trường, người ta thường xét đến hai loại tài sản: phi rủi ro (như trái phiếu...) và tài sản rủi ro (như cổ phiếu, bất động sản...)\\
+Loại tài sản phi rủi ro với biến động giá $X_0(t)$ được xét qua phương trình vi phân:
+\begin{equation*}
+	dX_0(t)=\lambda(t,\omega)X_0(t)dt \condition{$X_0(0)=1,t\in[0,T]$}
+\end{equation*}
+Loại tài sản rủi ro với biến động giá $X_1(t)$ thường được xét qua phương trình vi phân ngẫu nhiên Itô có dạng:
+\begin{equation}\label{eq:ud1}
+	dX_1(t)=\alpha(t,\omega)X_1(t)dt+\beta(t,\omega)X_1(t)dB_t(\omega) \condition{$X_1(0)>0,t\in[0,T]$}
+\end{equation}
+trong đó: $\lambda(t,\omega)=\lambda(t);\alpha(t,\omega)=\alpha(t);\beta(t,\omega)=\beta(t)$ là những quá trình ngẫu nhiên thoả điều kiện:
+\begin{equation*}
+	E\int\limits_{0}^{T}[|\lambda(t)|+\alpha(t)+\beta^2(t)]dt<\infty;
+\end{equation*}
+Ta ký hiệu: $\tau_0(t)=\tau_0(t,\omega);\tau_1(t)=\tau_1(t)(t,\omega);t\in[0,T];\omega\in \Omega$ là những đơn vị vốn đầu tư cho loại tài sản phi rủi ro và rủi ro tương ứng. Khi đó ta gọi: $\tau(t):=(\tau_0(t),\tau_1(t))$ là một phương án đầu tư (một danh mục đầu tư) với tổng giá trị tài sản tại thời điểm t bằng:
+\begin{equation}\label{eq:ud2}
+	V^\tau(t)=\tau_0(t)X_0(t)+\tau_1(t)X_1(t)	
+\end{equation}
+Phương án đầu tư được gọi là tự tài trợ (seft-financing) nếu ta có:
+\begin{equation}\label{eq:ud3}
+	dVT\tau(t)=\tau_0(t)dX_0(t)+\tau_1(t)dX_1(t)
+\end{equation}
+Từ giả định: $\tau(t);t\in[0,T]$ là tự tài trợ, từ hệ thức \eqref{eq:ud2} ta sẽ có:
+\begin{equation*}
+	\tau_0(t)=\dfrac{V^\tau(t)-\tau_1(t)X_1(t)}{X_0(t)}
+\end{equation*}
+Từ các hệ thức trên suy ra:
+\begin{equation*}
+	dV^\tau(t)=\lambda(t)(V^\tau(t)-\tau_1(t)X_1(t))dt+\tau_1(t)dX_1(t)
+\end{equation*}
+Sử dụng \eqref{eq:ud1}, dựa vào phương trình trên ta sẽ thu được:
+\begin{equation}\label{eq:ud4}
+	dV^\tau(t)=[\lambda(t)V^\tau(t)+(\alpha(t)-\lambda(t))\tau_1(t)X_1(t)]dt +\beta(t)\tau_1(t)X_1(t)dB_t
+\end{equation}
+Đến đây ta thấy rằng phương trình \eqref{eq:ud4} là một phương trình vi phân ngẫu nhiên tuyến tính mà ta sẽ nói đến phương pháp giải ở mục phía sau.\\
+Mặc khác, trong thực tế thường xét đến việc tìm phương án đầu tư $\tau(t);t\in[0,T]$ để thu được tổng giá trị tài sản là: $V^\tau(T)=\text{\AA}$. Đại lượng ngẫu nhiên $\text{\AA}$ tương ứng với quyền tài chính (financial claim), phương án đầu tư như vậy được gọi là phương án đáp ứng (replicating portfolio).\\
+Mở rộng vấn đề nêu trên vào trường hợp nhiều chiều, tương ứng với việc có n khối tài sản rủi ro với biến động giá $X_i(t),i=1,2,...,n$, được cho bởi:
+\begin{equation}\label{eq:ud5}
+	dX_i(t)=X_i(t^-)\left[\beta_i(t)dB_t+\int_{R_0}\gamma_i(t,x)\overline{N}(dt,dx) \right] \condition{$i=1,2,...,n$}
+\end{equation}
+trong đó $B(t)=(B_1(t),...,B_n(t))^T;t\geq 0$ là quá trình Wiener n-chiều với:
+\begin{equation*}
+	\overline{N}(dt,dx)=\left(\overline{N}_1(dt,dx_1),...,\overline{N}_n(dt,dx_n)\right)^T \condition{$x\in R_0:=R\backslash\{0\}$}
+\end{equation*}
+là độ đo ngẫu nhiên Poisson bù (compensated Poisson random measure) và còn:
+\begin{equation*}
+	\beta_i(t)=(\beta_{i_1}(t),...,\beta_{i_n}(t));\gamma_i(t,x)=(\gamma_{i_1}(t,x),...,\gamma_{i_n}(t,x))
+\end{equation*}
+là các quá trình ngẫu nhiên thoả điều kiện:
+\begin{equation*}
+	\sum_{i,j=1}^{n}\int_{0}^{T}\left[\beta_{ij}^2(t)+\int_{R_0}\gamma_{ij}^2(t,x)v(dx) \right]dt<\infty \condition{h.c}
+\end{equation*}
+Quyền $\text{\AA}$ sẽ có thể đáp ứng nếu tồn tại quá trình ngẫu nhiên:
+\begin{equation*}
+	\varphi(t)=\left(\varphi_1(t),...\varphi_n(t) \right)^T \condition{$t\geq 0$ sao cho:}\\
+\end{equation*}
+\begin{equation*}
+	\sum_{i=1}^{n}\int_{0}^{T}\varphi_i^2(t)X_i(t^-)\left[\sum_{j=1}^{n}\beta_{ij}^2(t)+\int_{R_0}\gamma_{ij}^2(t,x)v(dx) \right]dt<\infty \condition{h.c}
+\end{equation*}
+cùng với việc thoả điều kiện $\text{\AA}=E\{\text{\AA}\}+\sum\limits_{i=1}^{n}\int\limits_{0}^{T}\varphi_i(t)dX_i(t)$. Trong trường hợp này, ta nói rằng $\varphi$ là phương án đáp ứng đối với quyền tài chính.\\
+b. Giải quyết bài toán đầu tư đáp ứng\\
+Để giải quyết bài toán theo hướng đầu tư đáp ứng đã nêu, thường nó dẫn đến phương trình \eqref{eq:ud4} và \eqref{eq:ud5} mà ta xét chứng dưới dạng phương trình vi phân ngẫu nhiên tổng quát sau:\\
+\textbf{Định lý:} Cho phương trình vi phân ngẫu nhiên tuyến tính có dạng:
+\begin{dmath*}
+dX(t)=[\alpha(t)X(t^-)+\mathscr{A}(t)]dt+[\beta(t)X(t^-)+\mathscr{B}(t)]dB_t\\ +\int_{R_0}[\gamma(t,x)+\mathscr{T}(t,x)]\overline{N}(dt,dx) \condition{$X(0)=x_0$}
+\end{dmath*}
+trong đó: $\alpha(T)=\alpha(t,\omega);\beta(t)=\beta(t,\omega);\gamma(t,x)=\gamma(t,x,\omega);\mathscr{A}(t)=\mathscr{A}(t,\omega);\mathscr{B}(t)=\mathscr{B}(t,\omega);\mathscr{T}(t,x)=\mathscr{T}(t,x,\omega)$ là những quá trình ngẫu nhiên thoả các điều kiện:
+\begin{equation*}
+\begin{split}
+	&\int_{0}^{T}\left[\alpha(t)+\beta^2(t)+\int_{R_0}\gamma^2(t,x)v(dx) \right]dt<\infty\\
+	&\int_{0}^{T}\left[\mathscr{A}(t)+\mathscr{B}^2(t)+\int_{R_0}\mathscr{T}^2(t,x)v(dx) \right]dt<\infty
+\end{split}
+\end{equation*}
+Khi đó, ta sẽ có nghiệm của phương trình cho bởi hệ thức:
+\begin{dmath*}
+\dfrac{X(t)}{X_1(t^-)}=x_0+\int\limits_{0}^{t}X_1^{-1}(s^-)\left[\mathscr{A}(s)-\beta(s)\mathscr{B}(t)-\int\limits_{R_0}\dfrac{\gamma(s,x)\mathscr{T}(s,x)}{1+\gamma(s,x)}v(dx) \right]ds+\int\limits_{0}^{t}\dfrac{\mathscr{B}(s)}{X_1^{-1}(s^-)}dB(s)+\int\limits_{0}^{t}\int\limits_{R_0}\dfrac{\mathscr{T}(t,x)}{X_1(s^-)(1+\gamma(s,x))}\overline{N}(dt,dx).	
+\end{dmath*}
+trong đó:
+\begin{dmath*}
+X_1(t^-)=\exp\left\{\int_{0}^{t}\left[\alpha(s)-\dfrac{1}{2}\beta^2(t)+\int_{R_0}[\log(1+\gamma(s,x))-\gamma(s,x)]v(dx) \right]+\int_{0}^{t}\beta(s)dB(s)+\int_{R_0}\int_{0}^{t}\log(1+\gamma(s,x))\overline{N}(ds,dx) \right\}
+\end{dmath*}
+Để chứng minh định lý này ta dùng phương pháp tách nghiệm đã xét ở phần trước. Ngoài ra, để giải quyết cụ thể hơn các vấn đề về bài toán đầu tư rõ ràng ta phải xét thêm đến những loại quyền chọn cụ thể trên thị trường (quyền chọn Châu Âu, quyền chọn Châu Á...). Việc xem xét và giải chúng trong một vài trường hợp đã cho ta những kết quả nhất định như các kết quả kinh điển của Black-Scholes, Floyd B. Hanson.\\
+
+
 \textbf{Quyển "Quá trình ngẫu nhiên - Phần 2"}\\
 \textbf{Giải phương trình vi phân tuyến tính Itô - Levy}\\
 \textbf{Định lý 4.4.1:}\\
