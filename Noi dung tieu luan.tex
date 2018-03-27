@@ -191,7 +191,7 @@ Hay:
 \begin{equation*}
 	N_t=N_0.exp[(r-\dfrac{\alpha^2}{2})t+\alpha B_t]
 \end{equation*}
-Đó là lời giải của mô hình dân số đã cho.
+Đó là lời giải của mô hình dân số đã cho.\\
 \textbf{b. Chuyển động Brown trên đường tròn đơn vị}\\
 Ta chọn $X=B$, một chuyển động Brown 1 chiều và $g(t,x)=e^{ix}=(\cos{x},\sin{x})\in\mathbb{R}^2$ với $x\in\mathbb{R}$. Khi đó
 \begin{equation*}
@@ -202,6 +202,27 @@ Vậy
 	Y=(Y_1,Y_2) \condition{với $Y_1=\cos{B},Y_2=\sin{B}$}
 \end{equation*}
 Theo công thức Itô:
+\begin{equation*}
+	dY_1=-\sin{B.dB}-\dfrac{1}{2}\cos{B}dt
+\end{equation*}
+\begin{equation*}
+	dY_2=-\cos{B.dB}-\dfrac{1}{2}\sin{B}dt
+\end{equation*}
+Như vậy, quá trình 2 chiều $Y=(Y_1,Y_2)$ mà ta gọi là chuyển động Brown trên đường tròn đơn vị, $(Y_1^2+Y_2^2=1)$ là lời giải của hệ phương trình vi ngẫu nhiên
+\begin{equation*}
+	dY_1=-\dfrac{1}{2}Y_1dt-Y_2dB,
+\end{equation*}
+\begin{equation*}
+	dY_2=-\dfrac{1}{2}Y_2dt+Y_1dB
+\end{equation*}
+hoặc dưới dạng ma trận
+\begin{equation*}
+	dY=-\dfrac{1}{2}Y+KYdB,
+\end{equation*} 
+trong đó
+\begin{equation*}
+	Y=(Y_1,Y_2)\condition{$K=\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$}.
+\end{equation*}
 
 \subsection{Khái niệm về phương trình vi phân ngẫu nhiên}
 \subsubsection{Điều kiện về sự tồn tại và duy nhất nghiệm}
