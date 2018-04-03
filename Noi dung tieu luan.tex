@@ -238,7 +238,210 @@ là những hàm đo được và thoả mãn
 	\item $|b(t,x)|+|\sigma(t,x)\leq C(1+|x|)|$, với $x\in\mathbb{R}^n,t\in[0,T]$ và với hằng số C nào đó, trong đó $|b|$ là độ dài vectơ còn $|\sigma|=\sum{|\sigma_{ij}|^2}$.
 	\item $|b(t,x)-b(t,y)|+|\sigma(t,x)-\sigma(t,y)|\leq D.|x-y|,x,y\in\mathbb{R}^n,t\in[0,T]$ và D là hằng số nào đó.
 \end{enumerate}
-
+Cho $Z$ là một biến ngẫu nhiên độc lập với $\sigma$-trường $\mathscr{F}_\infty=\sigma \condition{$(B_t;0<t<\infty)$}$ sao cho $E(|Z|^2)<\infty$. Kh đó, phương trình vi phân ngẫu nhiên
+\begin{equation*}
+	dX_t=b(t,X_t)dt+\sigma(t,X_t)dB_t \tag{PT}
+\end{equation*}
+\begin{equation*}
+	X_0=Z
+\end{equation*}
+có một lời giải duy nhất, liên tục theo t, mỗi thành phần của $X_t$ là một quá trình thuộc về lớp $N[0,T]=\{f:[0,\infty)\times\Omega\rightarrow\mathbb{R},\mathscr{B}\times\mathscr{F}$-đo được,$\mathscr{F}_t$-thích nghi và $E\int_0^T|f(t,\omega)|^2dt<\infty$, trong đó $\mathscr{B}=\mathscr{B}_{[0,\infty)},\mathscr{F}_t=\sigma(B_s,s\leq t)\}$\\
+\textbf{b. Giải thích}\\
+Ta sẽ giải thích hai điều kiện (i) và (ii) trong phát biểu định lý nói trên qua hai ví dụ sau đây và sẽ dễ dàng thấy rằng đó đều là những điều kiện rất tự nhiên. Các ví dụ này sẽ liên quan đến các phương trình vi phân tất định (khi đó $\sigma=0$).\\
+\begin{example}
+Xét phương trình $\dfrac{dX_t}{dt}=X^2_t,X_0=1$ (tức là $dX_t=X_t^2dt,X_0=1$).	
+\end{example}
+Ở đây $b(s)=x^2$ không thoả mãn điều kiện (i). Phương trình này có một nghiệm duy nhất
+\begin{equation*}
+	X_t=\dfrac{1}{1-t} \condition{$t\neq 1$}
+\end{equation*}
+Nghiệm này không xác định với $t=1$ và $X_t\rightarrow\infty$ khi $t\rightarrow 1$ (ta thường nói: $X_t$ "bùng nổ" hay xuất phát tại $t=1$).\\
+Nói chung, điều kiện (i) dùng để đảm bảo cho lời giải của (PT) $X_t(\omega)$ không bùng nổ, tức là $|X_t(\omega)|\not\to\infty$ tại một điểm hữu hạn.\\
+\begin{example}
+	Xét phương trình $\dfrac{dX_t}{dt}=3X^{2/3}_t,X(0)=0$ (tức $dX_t=3X^{2/3}_tdt,X_0=1$).
+\end{example}
+Ở đây $b=3x^{2/3}$ không thoả mãn điều kiện Lipschitz (ii). Từ đó ta có thể suy ra một lời giải của phương trình trên là $X_t=t^3$. Nhưng phương trình nào còn có nhiều lời giải khác. Xét với mọi $a>0$ ta còn các nghiệm
+\begin{equation*}
+	X_t=\begin{cases}
+		0&\condition{với $t\leq a$}\\
+		(t-a)^3&\condition{với $t>a$}
+	\end{cases}
+\end{equation*}
+Vậy điều kiện (ii) đảm bảo tính duy nhất của lời giải của phương trình (PT), theo nghĩa hầu chắc chắn.\\
+\textbf{c. Chứng minh Định lý tồn tại duy nhất lời giải}\\
+\textbf{$\bullet$ Sự duy nhất}\\
+Sự duy nhất sẽ được chứng minh dựa vào sự đẳng cự Itô và Điều kiện Lipschitz (ii). Giả sử
+\begin{equation*}
+	X_1(t,\omega)=X_t(\omega)
+\end{equation*}
+và
+\begin{equation*}
+	X_2(t,\omega)=\widehat{X}_t(\omega)
+\end{equation*}
+là hai lời giải với các điều kiện ban đầu $Z$ và $\widehat{Z}$, tức là $X_1(0,\omega)=Z(\omega),X_2(0,\omega)=\widehat{Z}(\omega),\omega\in\Omega$.\\
+Thực ra ở đây ta chỉ cần tới trường hợp $Z=\widehat{Z}$ nhưng ta sẽ đưa vào một ước lượng tổng quát hơn sau đây, liên quan đến tính liên tục Feller.\\
+Đặt $a(s,\omega)=b(s,X_s)-b(s,\widehat{X}_s)$ và $\gamma(s,\omega)=\sigma(s,X_s)-\sigma(s,\widehat{X}_s)$. Khi đó ta có:
+\begin{equation*}
+\begin{split}
+	E[|X_t-\widehat{X}_t|^2]&=E[(Z-\widehat{Z}+\int_0^tads+\int_0^t\gamma dB_s)^2]\\
+&\leq 3E[|Z-\widehat{Z}|^2]+3E|(\int_0^tads)^2]+3E|(\int_0^t\gamma dB_s)^2]\\
+&\leq 3E|Z-\widehat{Z}|^2+E(1+t).D^2\int_0^tE|X_s-\widehat{X}_s|^2ds
+\end{split} \condition{(BĐT Cauchy)}
+\end{equation*}
+bởi vì: theo (ii) $|a|+|\gamma|\leq D.|X-\widehat{X}|$, do đó: $a^2$ hoặc $\gamma^2\leq a^2+\gamma^2\leq (|a|+|\gamma|)^2\leq D^.|X-\widehat{X}_s|^2)$. Vậy hàm
+\begin{equation*}
+	v(t)=E|X_t-\widehat{X}_t|^2\condition{$0\leq t\leq T$}
+\end{equation*}
+thoả mãn
+\begin{equation*}
+	v(t)\leq F+A.\int_0^tv(s)ds,
+\end{equation*}
+trong đó 
+\begin{equation*}
+	F=3E|Z-\widehat{Z}|^2\text{ và }A=3(1+T)D^2
+\end{equation*}
+Đặt $\omega(t)=\int_0^tv(s)$. Khi đó $\omega^'(t)\leq F+A.\omega(t)$. Do đó, vì $\omega(0)=0$ nên $\omega(t)\leq\dfrac{F}{A}(e^{At}-1)$. Theo bất đẳng thức tìm được ở trên $v(t)\leq F+A\omega(t)$, ta có
+\begin{equation*}
+	v(t)\leq F.exp(At)
+\end{equation*}
+hay là
+\begin{equation*}
+	E|X_t-\widehat{X}_t|^2\leq F.exp(At)
+\end{equation*}
+Bây giờ ta giải thiết rằng $Z=\widehat{Z}$. Khi đó $F=0$ và do đó $v(t)=0$ với mọi $t\geq 0$. Từ đó ta có
+\begin{equation*}
+	P[|X_t-\widehat{X}_t|=0,\forall t\in \mathbb{Q}\cap[0,T]]=1
+\end{equation*}
+trong đó $\mathbb{Q}$ là tập hợp các số hữu tỉ. Do tính liên tục hầu khắp nơi của ánh xạ $t\rightarrow|X_t-\widehat{X}_t|$ ta suy ra rằng
+\begin{equation*}
+	P\{X_t(\omega)=\widehat{X}_t(\omega),\forall t\in[0,T]\}=1
+\end{equation*}
+hay
+\begin{equation*}
+	X_1(t,\omega)=X_2(t,\omega)\condition{h.c.c}
+\end{equation*}
+\textbf{$\bullet$ Sự tồn tại}\\
+Ta sẽ chứng minh sự tồn tại lời giải của (PT) theo một phương pháp tương tự đối với phương trình vi phân thường, bằng cách dùng phép lặp Picard. Trước tiên, ta định nghĩa: $Y_t^{(0)}=X_0$ và $Y_t^{(k)}=Y_t^{(k)}(\omega)$ một cách quy nạp như sau:
+\begin{equation}\label{eq:stt1}
+	Y_t^{(k+1)}=X-0+\int_0^tb(s,Y_s^{(k)})ds+\int_0^t\sigma(s,Y_s^{(k)})dB_s
+\end{equation}
+Khi đó, tính toán tương tự như đối với Phần Duy nhất ở trên, ta có:
+\begin{equation}\label{eq:stt2}
+	E|Y_t^{(k+1)}-Y_t^{(k)}|\leq(1+T)3D^2\int_0^tE|Y^{(k)}_s-Y^{(k-1)}_s|^2ds
+\end{equation}
+với $k\geq 1,t\leq T$ và
+\begin{equation*}
+	\begin{split}
+		E|Y^{(1)}_t-Y^{(0)}_t|^2&\leq 2C^2t^2(1+EX_0^2)+2C^2t(1+EX^2_0)\\
+		&\leq 2C^2T.t(1+EX^2_0)+2C^2t(1+EX_0^2)=A_1t,
+	\end{split}
+\end{equation*}
+trong đó hằng số $A_1$ chỉ phụ thuộc vào $C,T$ và $EX^2_0$. Do đó, theo \eqref{eq:stt2} ta có:
+\begin{equation*}
+	E|Y_t^{(2)}-Y_t^{(1)}|^2\leq(1+T).3D^2.\int_0^tA_1.tdt\underbrace{(1+T).3D^2.A_1}_{A_2}.\dfrac{t^2}{2!}
+\end{equation*}
+Quy nạp theo k, ta có:
+\begin{equation}\label{eq:stt3}
+	E|Y_t^{(k+1)}-Y_t^{(k)}|^2\leq\dfrac{A_2^{(k+1)}.t^{(k+1)}}{(k+1)!}\condition{$k\geq 0,t\in[0,T]$}
+\end{equation}
+trong đó $A_2$ là một hằng số chỉ phụ thuộc $C,D,T$ và $EX_0^2$.\\
+Tiếp theo, với mỗi $\omega$ cố định thuộc $\Omega$, ta có:
+\begin{equation*}
+	\begin{split}
+		\sup_{0\leq t\leq T}|Y_t^{(k+1)}-Y_t^{(k)}|&\leq\int_0^t|b(s,Y_s^{(k)})-b(s,Y_s^{(k-1)})|ds+\\
+		&+\sup_{0\leq t\leq T}|\int_0^t[\sigma(s,Y_t^{(k)})-\sigma(s,Y_s^{(k-1)})]dB_s|
+	\end{split}
+\end{equation*}
+Theo bất đẳng thức Martingale của Doob
+\begin{equation*}
+	P\left(\sup_{0\leq t\leq T}|M_t|\geq\lambda \right)\leq\dfrac{1}{\lambda^p}E|M_t|^p
+\end{equation*}
+thì ta có
+\begin{equation*}
+\begin{split}
+P\left(\sup_{0\leq t\leq T}|Y_t^{(k+1)}-Y_t^{(k)}|\geq 2^{-k} \right)&\leq P\left\{\left[\int\limits_0^T(b(s,Y_s^{(k)})-b(s,Y_s^{(k-1)}))ds \right]^2>\left(\dfrac{1}{2^{k+1}}\right)^2 \right\}\\
+&+P\{\sup{|\underbrace{\int\limits_0^t(\sigma(s,Y_s^{(k)})-\sigma(s,Y_s^{(k-1)}dB_s}_{mactingan}|}>\dfrac{1}{2^{(k+1)}} \}\\
+&\leq	2^{2k+2}.T.\int_0^TE|b(s,Y_s^{(k)})-b(s,Y_s^{(k-1)})|^2ds\\
+&+2^{2k+2}.\int_0^TE|\sigma(s,Y_s^{(k)})-\sigma(s,Y_s^{(k-1)})|^2ds\\
+&\leq 2^{2k+2}.D^2(T+1).\int_0^T\dfrac{A_2^kt^k}{k!}dt\\
+&\leq\dfrac{(4A_2T)^{k+1}}{(k+1)!}\text{ nếu }A_2\geq4D^2(T+1)
+\end{split}
+\end{equation*}
+Do đó bổ đề Borel-Cantelli, ta có
+\begin{equation*}
+	P(\sup{|Y_t^{(k+1)}-Y_t^{(k)}|}>\dfrac{1}{2^k} \text{ với vô số k)}=0
+\end{equation*}
+Vậy với hầu hết $\omega$, tồn tại một $k_0=k_0(\omega)$ sao cho
+\begin{equation*}
+	\sup_{0\leq t\leq T}|Y_t^{(k+1)}-Y_t^{(k)}|<\dfrac{1}{2^k}\text{ với }k>k_0(\omega)
+\end{equation*}
+Do đó dãy
+\begin{equation*}
+	Y_t^{(n)}(\omega)=Y_t^{(0)}(\omega)+\sum_{k=0}^{n-1}[Y_t^{(k+1)}(\omega)-Y_t^{(k)}(\omega)]
+\end{equation*}
+hội tụ đều với hầu hết mọi $\omega$ (hội tụ điều hầu khắp nơi). Ký hiệu giới hạn đó bởi $X_t=X_t(\omega)$. Khi đó:
+\begin{equation*}
+	X_t\begin{cases}
+		\text{là $t$-liên tục với hầu hết $\omega$ bởi vì $Y_t^{(n)}$ là $t$-liên tục h.k.n với $\forall n$}\\
+		\text{là $\mathscr{F}_t$-đo được $\forall t$, vì $Y_t^{(n)}$ là $\mathscr{F}_t$-đo được $\forall t,\forall n$}
+	\end{cases}
+\end{equation*}
+Tiếp theo phần chứng minh là giới hạn trong không gian đủ $L^2(P)$:\\
+Cho $m>n\geq0$ là các số nguyên. Theo \eqref{eq:stt3} ta có
+\begin{equation*}
+	\begin{split}
+		E(|Y_t^{(m)}-Y_t^{(n)}|^2)&=||Y_t^{(m)}-Y_t^{(n)}||^2_{L^2(P)}\\
+		&=\left[||\sum_{k=n}^{m-1}[Y_t^{(k+1)}-Y_t^{(k)}]||_{L^2(P)}\right]^2\\
+		&\leq\left[\sum_{k=n}^{m-1}||Y_t^{(k+1)}-Y_t^{(k)}||_{L^2(P)}\right]^2\\
+		&=\left[\sum_{k=n}^{m-1}E(|Y_t^{(k+1)}-Y_t^{(k)}|^2)^{\frac{1}{2}}\right]^2\\
+		&\leq\left(\sum_{k=n}^{\infty}\dfrac{(A_2T)^{k+1}}{(k+1)!}\right)\longrightarrow0\text{ khi }n\rightarrow\infty.
+	\end{split}
+\end{equation*}
+Do đó $\{Y_t^{(n)}\}$ hội tụ trong $L_2(P)$ đến một mốc giới hạn mà ta ký hiệu là $Y_t:Y_t^{(n)}\xrightarrow [ (n\rightarrow\infty) ]{ L^2(P) }Y_t$. Vậy tồn tại một dãy con của $\{Y_t^{(n)}(\omega)\}$ hội tụ theo từng điểm đến $Y_t(\omega)$, tức là $|Y_t^{(n)}(\omega)-Y_t(\omega)|\rightarrow0$, và do đó ta phải có $Y_t=X_t$ hầu chắc chắn. Việc còn lại là phải chứng minh rằng $Y_t$ thoả mãn phương trình vi phân (PT) đã cho:\\
+Với mọi $n$, ta có:
+\begin{equation}\label{eq:stt5}
+	Y_t^{(n+1)}=X_0+\int_0^tb(s,Y_s^{(n)})ds+\int_0^t\sigma(s,Y_s^{(n)})dB_s
+\end{equation}
+Ta đã có $Y_t^{(n+1)}\rightarrow X_t$ khi $n\rightarrow\infty$ và sự hội tụ là điều theo $t\in[0,T]$ với hầu hết $\omega$. Theo (4) và Bổ đề Fatou ta có
+\begin{equation*}
+	E[\int_0^t|X_t-Y_t^{(n)}|^2dt]\leq\limsup_{m\rightarrow\infty}E\int_0^t|Y_t^{(m)}-Y_t^{(n)}|^2dt\rightarrow0\condition{$(n\rightarrow\infty)$}
+\end{equation*}
+Ta chứng minh
+\begin{equation*}
+	A\equiv\int_0^t\sigma(s,Y_s^{(n)}dB_s\xrightarrow{L^2(P)}\int_0^t\sigma(s,X_s)dB_s:=B
+\end{equation*}
+Thật vậy:
+\begin{equation*}
+	\begin{split}
+		||A-B||^2_{L^2(P)}&=E\left[(\int_0^t(\sigma(s,Y_s^{(n)})-\sigma(s,X_s))dB_s)^2\right]\\
+		&=E\int_0^t|\sigma(s,Y_s^{(n)})-\sigma(s,X_s)|^2ds
+	\end{split}
+\end{equation*}
+theo phép đẳng cự Itô:
+\begin{equation*}
+	E\left|\int_0^tf(s,\omega)dB_s \right|^2=E\int_0^t|f(s,\omega)|^2ds
+\end{equation*}
+mà ta lại có $Y_s^{(n)}$ hội tụ đều với $X_s$ hầu chắc chắn, do đó vế trái $\rightarrow0$. Ta cũng có:
+\begin{equation*}
+	\int_0^tb(s,Y_s^{(n)})ds\xrightarrow{L^2(P)}\int_0^tb(s,X_s)ds
+\end{equation*}
+vì theo bất đẳng thức Hölder $(\int fg)^2\leq\int f^2 \int g^2$ áp dụng cho $g=1:(\int_0^t f)^2\leq t\int_0^t f^2$, ở đây ta có:
+\begin{equation*}
+	\left|\int_0^t(b(s,Y_s^{(n)})-b(s,X_s))ds \right|^2\leq t.\int_0^t|b(s,Y_s^{(n)})-b(s,X_s)|^2ds
+\end{equation*}
+cho nên
+\begin{equation*}
+	E\left|\int_0^t(b(s,Y_s^{(n)}-b(s,X_s) \right|^2\leq tE.\int_0^t|\underbrace{ b(s,Y_s^{(n)})-b(s,X_s)}_{\text{dần đến 0}}|^2ds
+\end{equation*}
+Do đó, qua giới hạn trong $L^2(P)$ cả hai vế của \eqref{eq:stt5}, ta nhận thấy $X_t$ thoả mãn phương trình (PT) đã cho:
+\begin{equation*}
+	\begin{cases}
+		dX_t=b(t,X_t)dt+\sigma(t,X_t)dB_t\\
+		X_0=Z
+	\end{cases}\condition{(PT)}
+\end{equation*}
+Điều đó hoàn tất chứng minh Định lý tồn tại và duy nhất lời giải của phương trình vi phân ngẫu nhiên.
+\subsection{Hướng đi khác cho điều kiện tồn tại và duy nhất nghiệm}
 Ta xét phương trình vi phân ngẫu nhiên trong các điều kiện sau:
 \begin{enumerate}[(1)]
 	\item Không gian xác suất $(\Omega,\mathscr{F},P)$ với $\sigma$ - trường $\{\mathscr{F}_t,i\in [0,T]\}$
@@ -246,8 +449,7 @@ Ta xét phương trình vi phân ngẫu nhiên trong các điều kiện sau:
 	\item $\xi_0$ là vectơ ngẫu nhiên $\mathscr{F}_0$ - đo được và vectơ $\xi_0$ không phụ thuộc vào quá trình $W(t)$.
 	\item Các hàm số $a(t,x)$ và $\delta(t,x)\left(t\in [0,T];x\in R^m \right)$ nhận các giá trị trong $R^m$ và $\mathscr{L}(R^m)$ tương ứng, với $\mathscr{L}(R^m)$ là tập các toán tự tuyến tính từ $R^m$.\\
 \end{enumerate}
-
-\textbf{Dạng của phương trình vi phân ngẫu nhiên:}\\
+Cụ thể với phương trình như sau:
 \begin{equation}\label{eq:c3e1}
 	d\xi(t)=a(t,\xi(t))dt+\delta(t,\xi(t))dW(t)
 \end{equation}
@@ -271,8 +473,7 @@ Ta nói rằng phương trình \eqref{eq:c3e1} có nghiệm duy nhất nếu đ�
 \begin{equation*}
 	P\left\{\sup_{0\leq t\leq T}|\xi_1(t)-\xi_2(t)|>0 \right\}=0
 \end{equation*}
-Ta làm quen với định lý tồn tại và duy nhất nghiệm.\\
-\textbf{ĐỊNH LÝ 3.1.2}\\
+\subsubsection{Định lý tồn tại và duy nhất nghiệm}
 Giả sử các hệ số của phương trình \eqref{eq:c3e1} thoả các điều kiện:
 \begin{enumerate}[(1)]
 	\item Với mọi $t\in[0,T],x\in R^m$ ta có:
@@ -396,6 +597,10 @@ Như vậy ta nói rằng $\{\xi_t^*,t\in[0,T]\}$ là nghiệm yếu của phư�
 	\item Tính duy nhất của nghiệm yếu được hiểu theo nghĩa có cùng phân phối xác suất.
 	\item Tên gọi nghiệm mạnh và nghiệm yếu được đặt ra vì nghiệm mạnh sẽ là nghiệm yếu, nhưng nghiệm yếu không thể trở thành nghiệm mạnh.
 \end{itemize}
+\pagebreak
+\section{Dạng của phương trình vi phân ngẫu nhiên:}
+
+
 \textbf{2. Một số phương trình đặc biệt}\\
 \textbf{Định nghĩa 3.2.1: Phương trình vi phân tuyến tính thuần nhất}\\
 Phương trình vi phân ngẫu nhiên tuyến tính thuần nhất là phương trình có dạng:
