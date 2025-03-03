@@ -1,11 +1,14 @@
 %Phần thiết đặt trang
-\documentclass[14pt,a4paper]{article}
+\RequirePackage{fix-cm}
+\documentclass[a4paper]{article}
 \usepackage{mathastext}
 \usepackage[utf8]{vietnam}
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{type1cm}  % Type 1 Computer Modern fonts
+\usepackage{fix-cm}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 %Thụt đầu dòng cho tất cả
 \usepackage{indentfirst}
@@ -31,6 +34,8 @@
 \fancyhf{}
 \fancyhead[R]{\leftmark}
 \fancyfoot[C]{Trang \thepage}
+\setlength{\headheight}{20.0pt}%
+\addtolength{\topmargin}{-8.0pt}%
 \fancypagestyle{plain}{%
     \fancyhf{}%
     \renewcommand{\headrulewidth}{0pt}%
@@ -922,7 +927,7 @@ Suy ra:
 \end{cases}	
 \end{dmath*}
 Đặt $X_1(t)$ cho bởi hệ thức \eqref{eq:pt1}, và các biểu thức của $A^*(t,\omega);B^*(t,\omega);G^*(t,z,\omega)$ đã xác định được vào biểu thức \eqref{eq:pt3}, ta sẽ có nghiệm \eqref{eq:dn1}. $\blacksquare$\\
-\section{Một số ứng dụng của phương trình vi phân ngẫu nhiên}
+\section{Một số ứng dụng của phương trình vi phân ngẫu nhiên}\setlength{\emergencystretch}{3em}
 \subsection{Bài toán về chọn danh mục đầu tư rủi ro}
 Trước hết, ta mô hình hoá bài toán về tài sản và phương án đầu tư trên thị trường bằng các công cụ của giải tích ngẫu nhiên. Khi xét đến biến động của dòng tài sản trên thị trường, người ta thường xét đến hai loại tài sản: phi rủi ro (như trái phiếu...) và tài sản rủi ro (như cổ phiếu, bất động sản...)\\
 Loại tài sản phi rủi ro với biến động giá $X_0(t)$ được xét qua phương trình vi phân:
